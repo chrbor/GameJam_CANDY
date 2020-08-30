@@ -8,18 +8,20 @@ public class PlayerScript : MonoBehaviour
     private Animator anim;
 
     /// <summary> Bestimmt, wie schnell der Char bechleunigen kann </summary>
-    [Range(0f, 4f)]
     public float acceleration = 0.2f;
     /// <summary> die maximale Geschwindigkeit, nit der sich der Char bewegen kann </summary>
-    [Range(1f, 10f)]
     public float maxSpeed = 3f;
+    /// <summary> gibt an wie stark der Char abbremst </summary>
+    [Range(0f, 1f)]
+    public float speedDamping;
     /// <summary> Bestimmt, wie hoch der Char springen kann </summary>
-    [Range(1f, 20f)]
     public float jumpPower = 10f;
 
     
     /// <summary> Zähler, der bestimmt wie lange der Char noch springen kann </summary>
     private float jumpCounter;
+    /// <summary> Faktor, mit dem die Geschwindigkeit des Char veringert wird </summary>
+    private Vector2 dampingVec;
 
     // Start is called before the first frame update
     void Start()
@@ -45,13 +47,13 @@ public class PlayerScript : MonoBehaviour
         }
 
         //Checke Bewegung:
-        if(Input.GetKey(KeyCode.D) == Input.GetKey(KeyCode.A)) { Debug.Log("stop");  anim.SetBool("running", false); return; }
+        if(Input.GetKey(KeyCode.D) == Input.GetKey(KeyCode.A)) { rb.velocity *= new Vector2(1 - speedDamping ,1); anim.SetBool("running", false); return; }
 
         anim.SetBool("running", true);
         float dir = Input.GetKey(KeyCode.D) ? 1 : -1;
         transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * dir, transform.localScale.y, 1);
 
-        if (Mathf.Abs(rb.velocity.x) < maxSpeed)
+        if (Mathf.Abs(rb.velocity.x) < maxSpeed || Mathf.Sign(rb.velocity.x) != dir )
             rb.velocity += Vector2.right * dir * acceleration;// * Time.deltaTime;
     }
 
