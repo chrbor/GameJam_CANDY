@@ -25,7 +25,7 @@ TextureImporter:
     second: A_L_Arm
   - first:
       213: -7062622651848732699
-    second: Rig_20200830120401_7
+    second: Ground
   - first:
       213: -696440907324075485
     second: Rig_20200830120401_8
@@ -2044,7 +2044,7 @@ TextureImporter:
         boneIndex[2]: 0
         boneIndex[3]: 0
     - serializedVersion: 2
-      name: Rig_20200830120401_7
+      name: Ground
       rect:
         serializedVersion: 2
         x: 609
