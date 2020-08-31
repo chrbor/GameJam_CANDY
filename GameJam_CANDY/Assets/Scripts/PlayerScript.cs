@@ -109,4 +109,14 @@ public class PlayerScript : MonoBehaviour
         blockDive = false;
         yield break;
     }
+   //collision with Candy. Deletes Candy that the player collided with
+   //mainly Debug Reasons
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Candy")) 
+        {
+            Destroy(collision.gameObject);
+        }
+    }
 }
+    
