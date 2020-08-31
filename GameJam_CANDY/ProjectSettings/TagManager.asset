@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - GroundTrigger
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -16,13 +17,13 @@ TagManager:
   - 
   - Player
   - GroundOnly
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Objects
+  - PlayerHitBox
+  - EnemyHitBox
+  - Enemy
+  - Caddy
+  - CaddyBox
   - 
   - 
   - 
@@ -41,4 +42,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 1199263417
+    locked: 0
+  - name: Background
+    uniqueID: 2959769177
+    locked: 0
+  - name: Chars
+    uniqueID: 1140317561
+    locked: 0
+  - name: Player
+    uniqueID: 2260616801
+    locked: 0
+  - name: Forground
+    uniqueID: 152009611
+    locked: 0
+  - name: Effects
+    uniqueID: 542796889
     locked: 0
