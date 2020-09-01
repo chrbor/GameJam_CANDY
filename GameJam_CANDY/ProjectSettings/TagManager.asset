@@ -52,6 +52,9 @@ TagManager:
   - name: Chars
     uniqueID: 1140317561
     locked: 0
+  - name: Objects
+    uniqueID: 3689544543
+    locked: 0
   - name: Player
     uniqueID: 2260616801
     locked: 0
