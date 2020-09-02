@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static GameManager;
 
-public class PlayerScript : MonoBehaviour
+public class PlayerScript : CharScript
 {
-    private Rigidbody2D rb;
     private Animator anim;
 
     /// <summary> Bestimmt, wie schnell der Char bechleunigen kann </summary>
@@ -39,11 +39,17 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        //Steuerung des Spielers:
-
         //Checke ob in der Luft:
         inAir = !Physics2D.Raycast(transform.position, Vector2.down, 2.6f, rMask).collider;
+
+        PlayerControl();
+    }
+
+    /// <summary>
+    /// Steuerung des Spielers
+    /// </summary>
+    private void PlayerControl()
+    {
 
         //Checke Hechtrolle:
         if ((Input.GetKey(KeyCode.Space) && !inAir) || blockDive)
@@ -109,14 +115,24 @@ public class PlayerScript : MonoBehaviour
         blockDive = false;
         yield break;
     }
-   //collision with Candy. Deletes Candy that the player collided with
-   //mainly Debug Reasons
-    private void OnTriggerEnter2D(Collider2D collision)
+
+
+    /// <summary>
+    /// Trigger ist nur die Hitbox. Wenn die Hitbox ausgelöst wird, dann wird Schaden genommen
+    /// </summary>
+    /// <param name="other"></param>
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.CompareTag("Candy")) 
-        {
-            Destroy(collision.gameObject);
-        }
+        DamageReturn dmgCaused = other.GetComponent<IDamageCausing>().CauseDamage(gameObject);
+
+        lifepoints -= dmgCaused.damage;
+        if (lifepoints <= 0) { manager.GameOver(); Play_Death(); }
+    }
+
+    public override void Play_Death()
+    {
+        Debug.Log("Player died");
+
     }
 }
     
