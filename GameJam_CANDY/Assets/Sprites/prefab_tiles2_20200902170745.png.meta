@@ -1,0 +1,955 @@
+fileFormatVersion: 2
+guid: 95d67d1e0da2e5b4599e1920c0584d94
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1684906137186179952
+    second: prefab_tiles2_20200902170745_0
+  - first:
+      213: 976531114449745954
+    second: prefab_tiles2_20200902170745_1
+  - first:
+      213: 3181033612429189256
+    second: prefab_tiles2_20200902170745_2
+  - first:
+      213: -9047667241815167957
+    second: prefab_tiles2_20200902170745_3
+  - first:
+      213: -7876205156416914210
+    second: prefab_tiles2_20200902170745_4
+  - first:
+      213: -490508517752181718
+    second: prefab_tiles2_20200902170745_5
+  - first:
+      213: 5085337685178015075
+    second: prefab_tiles2_20200902170745_6
+  - first:
+      213: 5437992050483497132
+    second: prefab_tiles2_20200902170745_7
+  - first:
+      213: -5976284841069912194
+    second: prefab_tiles2_20200902170745_8
+  - first:
+      213: 7904010254720193715
+    second: prefab_tiles2_20200902170745_9
+  - first:
+      213: 2733237510796696324
+    second: prefab_tiles2_20200902170745_10
+  - first:
+      213: 6843663180040547324
+    second: prefab_tiles2_20200902170745_11
+  - first:
+      213: 2916289732708180065
+    second: prefab_tiles2_20200902170745_12
+  - first:
+      213: -5515365246268239841
+    second: prefab_tiles2_20200902170745_13
+  - first:
+      213: -4862294723767402623
+    second: prefab_tiles2_20200902170745_14
+  - first:
+      213: -1852724775257316389
+    second: prefab_tiles2_20200902170745_15
+  - first:
+      213: 8635027120034254518
+    second: prefab_tiles2_20200902170745_16
+  - first:
+      213: 290174714412208113
+    second: prefab_tiles2_20200902170745_17
+  - first:
+      213: -8133755858155091638
+    second: prefab_tiles2_20200902170745_18
+  - first:
+      213: -5538471799972449150
+    second: prefab_tiles2_20200902170745_19
+  - first:
+      213: 2840786846734269608
+    second: prefab_tiles2_20200902170745_20
+  - first:
+      213: -2788062069679879234
+    second: prefab_tiles2_20200902170745_21
+  - first:
+      213: 817833974352108720
+    second: prefab_tiles2_20200902170745_22
+  - first:
+      213: -227322311576120128
+    second: prefab_tiles2_20200902170745_23
+  - first:
+      213: -2981662880081856365
+    second: prefab_tiles2_20200902170745_24
+  - first:
+      213: -6955894698479317673
+    second: prefab_tiles2_20200902170745_25
+  - first:
+      213: 778992033201176581
+    second: prefab_tiles2_20200902170745_26
+  - first:
+      213: 3004397847388214851
+    second: prefab_tiles2_20200902170745_27
+  - first:
+      213: -4661405124484961124
+    second: prefab_tiles2_20200902170745_28
+  - first:
+      213: -7464598463054093548
+    second: prefab_tiles2_20200902170745_29
+  - first:
+      213: -5007253842264313566
+    second: prefab_tiles2_20200902170745_30
+  - first:
+      213: -3846940461542195682
+    second: prefab_tiles2_20200902170745_31
+  - first:
+      213: -1419463652011210601
+    second: prefab_tiles2_20200902170745_32
+  - first:
+      213: 2148074917997376699
+    second: prefab_tiles2_20200902170745_33
+  - first:
+      213: -5136632012121804527
+    second: prefab_tiles2_20200902170745_34
+  - first:
+      213: 6253898359326357491
+    second: prefab_tiles2_20200902170745_35
+  - first:
+      213: 7821464394095894273
+    second: prefab_tiles2_20200902170745_36
+  - first:
+      213: -2970417258571997372
+    second: prefab_tiles2_20200902170745_37
+  - first:
+      213: -6464659805006742468
+    second: prefab_tiles2_20200902170745_38
+  - first:
+      213: 8445854798397287162
+    second: prefab_tiles2_20200902170745_39
+  - first:
+      213: -2548315725445883572
+    second: prefab_tiles2_20200902170745_40
+  - first:
+      213: 5110834830078667864
+    second: prefab_tiles2_20200902170745_41
+  - first:
+      213: 2286526438083966221
+    second: prefab_tiles2_20200902170745_42
+  - first:
+      213: 1040567107643267956
+    second: prefab_tiles2_20200902170745_43
+  - first:
+      213: 701455016318788570
+    second: prefab_tiles2_20200902170745_44
+  - first:
+      213: -4373075611189380175
+    second: prefab_tiles2_20200902170745_45
+  - first:
+      213: 2870156595037389934
+    second: prefab_tiles2_20200902170745_46
+  - first:
+      213: -6756146159638257063
+    second: prefab_tiles2_20200902170745_47
+  - first:
+      213: -8294623824889346791
+    second: prefab_tiles2_20200902170745_48
+  - first:
+      213: -8391303480045780259
+    second: prefab_tiles2_20200902170745_49
+  - first:
+      213: 5991765832871986205
+    second: prefab_tiles2_20200902170745_50
+  - first:
+      213: -4022672959618271655
+    second: prefab_tiles2_20200902170745_51
+  - first:
+      213: 917806853148738401
+    second: prefab_tiles2_20200902170745_52
+  - first:
+      213: 7515249755198715884
+    second: prefab_tiles2_20200902170745_53
+  - first:
+      213: -1584171926028434884
+    second: prefab_tiles2_20200902170745_54
+  - first:
+      213: -6306833188121853243
+    second: prefab_tiles2_20200902170745_55
+  - first:
+      213: -5936094800005967629
+    second: prefab_tiles2_20200902170745_56
+  - first:
+      213: -4008454884231538520
+    second: prefab_tiles2_20200902170745_57
+  - first:
+      213: -4531466174974493151
+    second: prefab_tiles2_20200902170745_58
+  - first:
+      213: -1680291976066532793
+    second: prefab_tiles2_20200902170745_59
+  - first:
+      213: 7860618837766021242
+    second: prefab_tiles2_20200902170745_60
+  - first:
+      213: 2852185917793558649
+    second: prefab_tiles2_20200902170745_61
+  - first:
+      213: 6713888165669612808
+    second: prefab_tiles2_20200902170745_62
+  - first:
+      213: -83692380714409047
+    second: prefab_tiles2_20200902170745_63
+  - first:
+      213: 1656625910908006241
+    second: prefab_tiles2_20200902170745_64
+  - first:
+      213: 6042903714297087999
+    second: prefab_tiles2_20200902170745_65
+  - first:
+      213: -1466351191751293232
+    second: prefab_tiles2_20200902170745_66
+  - first:
+      213: 8875876573596984121
+    second: prefab_tiles2_20200902170745_67
+  - first:
+      213: -5822282834997966437
+    second: prefab_tiles2_20200902170745_68
+  - first:
+      213: -5855501731065869413
+    second: prefab_tiles2_20200902170745_69
+  - first:
+      213: -5947720336660286533
+    second: prefab_tiles2_20200902170745_70
+  - first:
+      213: 4888572833210742425
+    second: prefab_tiles2_20200902170745_71
+  - first:
+      213: -1686407712900032948
+    second: prefab_tiles2_20200902170745_72
+  - first:
+      213: -1894362460143670489
+    second: prefab_tiles2_20200902170745_73
+  - first:
+      213: 3995369369524665751
+    second: prefab_tiles2_20200902170745_74
+  - first:
+      213: -8377584889734483194
+    second: prefab_tiles2_20200902170745_75
+  - first:
+      213: -6770539735014011580
+    second: prefab_tiles2_20200902170745_76
+  - first:
+      213: 5799182870693870816
+    second: prefab_tiles2_20200902170745_77
+  - first:
+      213: 3186731588983083715
+    second: prefab_tiles2_20200902170745_78
+  - first:
+      213: -6800637913349429575
+    second: prefab_tiles2_20200902170745_79
+  - first:
+      213: 3510154846453790005
+    second: prefab_tiles2_20200902170745_80
+  - first:
+      213: -6786163287625559295
+    second: prefab_tiles2_20200902170745_81
+  - first:
+      213: -6611822480326965631
+    second: prefab_tiles2_20200902170745_82
+  - first:
+      213: 2444721084596707484
+    second: prefab_tiles2_20200902170745_83
+  - first:
+      213: -5607082727203592617
+    second: prefab_tiles2_20200902170745_84
+  - first:
+      213: -1706835453734398146
+    second: prefab_tiles2_20200902170745_85
+  - first:
+      213: -6850407831647306235
+    second: prefab_tiles2_20200902170745_86
+  - first:
+      213: 3896453988176750707
+    second: prefab_tiles2_20200902170745_87
+  - first:
+      213: 3971487103879381799
+    second: prefab_tiles2_20200902170745_88
+  - first:
+      213: 4738787179854739564
+    second: prefab_tiles2_20200902170745_89
+  - first:
+      213: -9184839088318513009
+    second: prefab_tiles2_20200902170745_90
+  - first:
+      213: 1072201804106919382
+    second: prefab_tiles2_20200902170745_91
+  - first:
+      213: -6648446408011159265
+    second: prefab_tiles2_20200902170745_92
+  - first:
+      213: -2986588668370329689
+    second: prefab_tiles2_20200902170745_93
+  - first:
+      213: 4545028744213662772
+    second: prefab_tiles2_20200902170745_94
+  - first:
+      213: -7609050665892373782
+    second: prefab_tiles2_20200902170745_95
+  - first:
+      213: -5315440543430615502
+    second: prefab_tiles2_20200902170745_96
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 128
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07b9bda643df16710800000000000000
+      internalID: 1684906137186179952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 640
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 228b4ecefd55d8d00800000000000000
+      internalID: 976531114449745954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8806b67773d452c20800000000000000
+      internalID: 3181033612429189256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 512
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2c2ba5849a307280800000000000000
+      internalID: -9047667241815167957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edc7ba1e32912b290800000000000000
+      internalID: -7876205156416914210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 512
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2ce3181a1d5139f0800000000000000
+      internalID: -490508517752181718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_6
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 512
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36d51ff6eafb29640800000000000000
+      internalID: 5085337685178015075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca8877c45f0a77b40800000000000000
+      internalID: 5437992050483497132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_8
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7fd97bc998ff0da0800000000000000
+      internalID: -5976284841069912194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_9
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b454ad037fa0bd60800000000000000
+      internalID: 7904010254720193715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_10
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 256
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40b5fc5e8096ee520800000000000000
+      internalID: 2733237510796696324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_11
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 256
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfbacb8276399fe50800000000000000
+      internalID: 6843663180040547324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_12
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 256
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 160a03c8f0eb87820800000000000000
+      internalID: 2916289732708180065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1095a9b78c7573b0800000000000000
+      internalID: -5515365246268239841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_14
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18f7694d5b8a58cb0800000000000000
+      internalID: -4862294723767402623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_15
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd3e83012acc946e0800000000000000
+      internalID: -1852724775257316389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_16
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6be81835a67c5d770800000000000000
+      internalID: 8635027120034254518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_17
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ff07578d58e60400800000000000000
+      internalID: 290174714412208113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_18
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a49c9e834281f1f80800000000000000
+      internalID: -8133755858155091638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 284bf14fd356323b0800000000000000
+      internalID: -5538471799972449150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_20
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8acb23206908c6720800000000000000
+      internalID: 2840786846734269608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_21
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebb8df4c150de49d0800000000000000
+      internalID: -2788062069679879234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_22
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bcd086aaa7895b00800000000000000
+      internalID: 817833974352108720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_23
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c41cf0ef8368dcf0800000000000000
+      internalID: -227322311576120128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: prefab_tiles2_20200902170745_24
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 398b0c878610f96d0800000000000000
+      internalID: -2981662880081856365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

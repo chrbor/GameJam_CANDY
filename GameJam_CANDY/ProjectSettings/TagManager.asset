@@ -6,6 +6,9 @@ TagManager:
   tags:
   - GroundTrigger
   - Ground
+  - Candy
+  - Hitbox
+  - Collectable
   layers:
   - Default
   - TransparentFX
@@ -24,7 +27,7 @@ TagManager:
   - Enemy
   - Caddy
   - CaddyBox
-  - 
+  - Background
   - 
   - 
   - 

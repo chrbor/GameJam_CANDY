@@ -15,5 +15,8 @@ public abstract class CharScript : MonoBehaviour
     public GameObject weapon;
 
     /// <summary> Animation vom Tod der Einheit </summary>
-    public abstract void Play_Death();
+    public virtual void Play_Death()
+    {
+        Debug.Log("Method 'Play_Death()' not implemented yet");
+    }
 }

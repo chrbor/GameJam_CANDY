@@ -7,6 +7,7 @@ public class PlayerScript : CharScript
 {
     private Animator anim;
 
+    [Header("Movement:")]
     /// <summary> Bestimmt, wie schnell der Char bechleunigen kann </summary>
     public float acceleration = 0.2f;
     /// <summary> die maximale Geschwindigkeit, nit der sich der Char bewegen kann </summary>
@@ -17,7 +18,10 @@ public class PlayerScript : CharScript
     /// <summary> Bestimmt, wie hoch der Char springen kann </summary>
     public float jumpPower = 10f;
 
-    
+    [Header("Hands:")]
+    public GameObject left_Hand;
+    public GameObject right_Hand;
+
     /// <summary> Zähler, der bestimmt wie lange der Char noch springen kann </summary>
     private float jumpCounter;
     /// <summary> Wenn wahr, dann wird gerade eine Hechtrolle ausgeführt </summary>
@@ -118,11 +122,34 @@ public class PlayerScript : CharScript
 
 
     /// <summary>
-    /// Trigger ist nur die Hitbox. Wenn die Hitbox ausgelöst wird, dann wird Schaden genommen
+    /// Trigger ist nur die Hitbox. Wenn die Hitbox ausgelöst wird, dann wird entweder Schaden genommen oder etwas aufgesammelt
     /// </summary>
     /// <param name="other"></param>
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.CompareTag("Collectable"))
+        {
+            CollBase coll = other.GetComponent<CollBase>();
+            other.transform.parent = right_Hand.transform;
+            other.transform.localScale = Vector3.one * coll.display.size_inHand;
+            other.transform.localPosition = new Vector2(coll.display.handPos_x, coll.display.handPos_y);
+            other.transform.eulerAngles = Vector3.forward * (right_Hand.transform.eulerAngles.z - coll.display.handAngle);
+
+            other.GetComponent<CircleCollider2D>().enabled = false;
+
+            Destroy(other.GetComponent<Rigidbody2D>());
+
+            coll.display.anim.SetBool("onGround", false);
+
+            SpriteRenderer sprite = other.transform.GetChild(0).GetComponent<SpriteRenderer>();
+            sprite.sortingLayerName = "Player";
+            sprite.sortingOrder = 4;
+
+            coll.light.SetActive(false);
+
+            return;
+        }
+
         DamageReturn dmgCaused = other.GetComponent<IDamageCausing>().CauseDamage(gameObject);
 
         lifepoints -= dmgCaused.damage;
