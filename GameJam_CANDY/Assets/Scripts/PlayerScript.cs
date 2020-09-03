@@ -110,7 +110,7 @@ public class PlayerScript : CharScript
         anim.SetInteger("dive", (int)Mathf.Sign(factor));
         anim.SetTrigger("doDive");
         float t = 0;
-        while(t < 0.5f)
+        while(t < 0.25f)
         {
             t += Time.fixedDeltaTime;
             rb.position += Vector2.right * factor * maxSpeed * 1.5f * Time.fixedDeltaTime;
