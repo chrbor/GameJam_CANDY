@@ -1,0 +1,499 @@
+fileFormatVersion: 2
+guid: aacb711e6d629cd46a9ec265600b6e33
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8823694591564634795
+    second: Ground3_20200902204317_0
+  - first:
+      213: 549889847756887957
+    second: Ground3_20200902204317_1
+  - first:
+      213: 8039356585810398302
+    second: Ground3_20200902204317_2
+  - first:
+      213: 2369245204891197673
+    second: Ground3_20200902204317_3
+  - first:
+      213: -2979418474877558835
+    second: Ground3_20200902204317_4
+  - first:
+      213: 9122071142104752186
+    second: Ground3_20200902204317_5
+  - first:
+      213: 2892864098731875843
+    second: Ground3_20200902204317_6
+  - first:
+      213: -2795879676868319023
+    second: Ground3_20200902204317_7
+  - first:
+      213: -1158608173132938216
+    second: Ground3_20200902204317_8
+  - first:
+      213: -2199185913886885196
+    second: Ground3_20200902204317_9
+  - first:
+      213: 5078645751151119811
+    second: Ground3_20200902204317_10
+  - first:
+      213: -2505237121108656741
+    second: Ground3_20200902204317_11
+  - first:
+      213: 5638554074910840480
+    second: Ground3_20200902204317_12
+  - first:
+      213: 7002767597619868983
+    second: Ground3_20200902204317_13
+  - first:
+      213: -1971603016332419076
+    second: Ground3_20200902204317_14
+  - first:
+      213: 9168651114078663510
+    second: Ground3_20200902204317_15
+  - first:
+      213: -4858637403969260158
+    second: Ground3_20200902204317_16
+  - first:
+      213: 5713142232458529678
+    second: Ground3_20200902204317_17
+  - first:
+      213: -4669054140496613159
+    second: Ground3_20200902204317_18
+  - first:
+      213: 5723089718077237456
+    second: Ground3_20200902204317_19
+  - first:
+      213: -1564889036344788232
+    second: Ground3_20200902204317_20
+  - first:
+      213: -1647773703785961755
+    second: Ground3_20200902204317_21
+  - first:
+      213: 7637048232286399076
+    second: Ground3_20200902204317_22
+  - first:
+      213: -22740444402204689
+    second: Ground3_20200902204317_23
+  - first:
+      213: -711059252056080823
+    second: Ground3_20200902204317_24
+  - first:
+      213: -511368827986584743
+    second: Ground3_20200902204317_25
+  - first:
+      213: -2006356699000458885
+    second: Ground3_20200902204317_26
+  - first:
+      213: 5589368401274110587
+    second: Ground3_20200902204317_27
+  - first:
+      213: 1414876275777900830
+    second: Ground3_20200902204317_28
+  - first:
+      213: -6012521004847913676
+    second: Ground3_20200902204317_29
+  - first:
+      213: -554874561150113366
+    second: Ground3_20200902204317_30
+  - first:
+      213: 8864627388797227904
+    second: Ground3_20200902204317_31
+  - first:
+      213: -4505130286276628770
+    second: Ground3_20200902204317_32
+  - first:
+      213: -2388633065875886735
+    second: Ground3_20200902204317_33
+  - first:
+      213: 7855110411618007274
+    second: Ground3_20200902204317_34
+  - first:
+      213: 2735936971510253261
+    second: Ground3_20200902204317_35
+  - first:
+      213: -7943989650819440122
+    second: Ground3_20200902204317_36
+  - first:
+      213: -6992139265201119876
+    second: Ground3_20200902204317_37
+  - first:
+      213: -8332345401755138282
+    second: Ground3_20200902204317_38
+  - first:
+      213: -5605017981574202584
+    second: Ground3_20200902204317_39
+  - first:
+      213: -2533393756128202617
+    second: Ground3_20200902204317_40
+  - first:
+      213: -8938064301435434915
+    second: Ground3_20200902204317_41
+  - first:
+      213: 4684497776446018209
+    second: Ground3_20200902204317_42
+  - first:
+      213: 5077146366283507220
+    second: Ground3_20200902204317_43
+  - first:
+      213: -3846106256943487376
+    second: Ground3_20200902204317_44
+  - first:
+      213: -8403806243829328776
+    second: Ground3_20200902204317_45
+  - first:
+      213: 657707798017674232
+    second: Ground3_20200902204317_46
+  - first:
+      213: 4314285851090696842
+    second: Ground3_20200902204317_47
+  - first:
+      213: -3957917950351159929
+    second: Ground3_20200902204317_48
+  - first:
+      213: -3795916877337016531
+    second: Ground3_20200902204317_49
+  - first:
+      213: -7358900372953930509
+    second: Ground3_20200902204317_50
+  - first:
+      213: 7463025325289038122
+    second: Ground3_20200902204317_51
+  - first:
+      213: 9040634104521893798
+    second: Ground3_20200902204317_52
+  - first:
+      213: 5230245605374330559
+    second: Ground3_20200902204317_53
+  - first:
+      213: 9025034194956199418
+    second: Ground3_20200902204317_54
+  - first:
+      213: 5053333405544342996
+    second: Ground3_20200902204317_55
+  - first:
+      213: 5876867401076389099
+    second: Ground3_20200902204317_56
+  - first:
+      213: -1132597101820158001
+    second: Ground3_20200902204317_57
+  - first:
+      213: -7603400238086446982
+    second: Ground3_20200902204317_58
+  - first:
+      213: 6619593076655847921
+    second: Ground3_20200902204317_59
+  - first:
+      213: -2953520850869549455
+    second: Ground3_20200902204317_60
+  - first:
+      213: 6376312527208637347
+    second: Ground3_20200902204317_61
+  - first:
+      213: 163654145560941582
+    second: Ground3_20200902204317_62
+  - first:
+      213: 1781457626565832834
+    second: Ground3_20200902204317_63
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 128
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Ground3_20200902204317_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 896
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: baadeb82b7f047a70800000000000000
+      internalID: 8823694591564634795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ground3_20200902204317_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 896
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5c0def6838819f60800000000000000
+      internalID: 8039356585810398302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ground3_20200902204317_10
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 768
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cdc8612769fa7640800000000000000
+      internalID: 5078645751151119811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ground3_20200902204317_20
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 640
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8faf3cb66b5684ae0800000000000000
+      internalID: -1564889036344788232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ground3_20200902204317_34
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae8b6fb1d45f20d60800000000000000
+      internalID: 7855110411618007274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ground3_20200902204317_45
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 256
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 874d75b1fbeaf5b80800000000000000
+      internalID: -8403806243829328776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ground3_20200902204317_49
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d27ca6136b1325bc0800000000000000
+      internalID: -3795916877337016531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ground3_20200902204317_62
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e041e2c049a654200800000000000000
+      internalID: 163654145560941582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

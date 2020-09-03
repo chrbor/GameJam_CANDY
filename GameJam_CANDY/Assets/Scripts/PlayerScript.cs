@@ -44,7 +44,7 @@ public class PlayerScript : CharScript
     void Update()
     {
         //Checke ob in der Luft:
-        inAir = !Physics2D.Raycast(transform.position, Vector2.down, 2.6f, rMask).collider;
+        inAir = !Physics2D.Raycast(transform.position, Vector2.down, 1.6f, rMask).collider;
 
         PlayerControl();
     }
@@ -133,7 +133,7 @@ public class PlayerScript : CharScript
             other.transform.parent = right_Hand.transform;
             other.transform.localScale = Vector3.one * coll.display.size_inHand;
             other.transform.localPosition = new Vector2(coll.display.handPos_x, coll.display.handPos_y);
-            other.transform.eulerAngles = Vector3.forward * (right_Hand.transform.eulerAngles.z - coll.display.handAngle);
+            other.transform.eulerAngles = Vector3.forward * (right_Hand.transform.eulerAngles.z + Mathf.Sign(transform.localScale.x) * coll.display.handAngle);
 
             other.GetComponent<CircleCollider2D>().enabled = false;
 
