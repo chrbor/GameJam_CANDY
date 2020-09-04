@@ -9,6 +9,7 @@ TagManager:
   - Candy
   - Hitbox
   - Collectable
+  - Caddy
   layers:
   - Default
   - TransparentFX

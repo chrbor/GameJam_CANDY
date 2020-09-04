@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class StartMenuButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GetComponent<Animator>().Play("Hover_Button", 0, (transform.parent.GetSiblingIndex() % 3) * 0.3f);
     }
 }

@@ -28,13 +28,10 @@ public class PlayerScript : CharScript
     private bool blockDive;
     /// <summary> Wenn wahr, dann ist der Char in der Luft, wenn falsch, dann ist er auf dem Boden </summary>
     private bool inAir;
-    /// <summary> Mask für den Raycast, um Bodenkontakt festzustellen </summary>
-    private int rMask = (1<<10) | (1<<15);//Kontakt mit Ground und Einkaufswagen
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
         jumpCounter = jumpPower;
@@ -43,6 +40,8 @@ public class PlayerScript : CharScript
     // Update is called once per frame
     void Update()
     {
+        if (!run) return;
+
         //Checke ob in der Luft:
         inAir = !Physics2D.Raycast(transform.position, Vector2.down, 1.6f, rMask).collider;
 
@@ -150,6 +149,7 @@ public class PlayerScript : CharScript
             return;
         }
 
+        if (other.CompareTag("Candy") && !other.GetComponent<CharScript>().active) return;//Trigger, um Candy zu aktivieren
         DamageReturn dmgCaused = other.GetComponent<IDamageCausing>().CauseDamage(gameObject);
 
         lifepoints -= dmgCaused.damage;
