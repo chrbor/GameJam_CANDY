@@ -19,13 +19,20 @@ public class DamageReturn
 {
     /// <summary> Der Schaden, der zugefügt wurde </summary>
     public float damage;
-    /// <summary> Die Kraft, mit der das getroffene Objekt zurückgeschleudert wird </summary>
-    public Vector2 power;
+    /// <summary> Die Kraftrichtung, mit der das getroffene Objekt zurückgeschleudert wird </summary>
+    public float angle;
+    /// <summary> Die Kraftmagnitude, mit der das getroffene Objekt zurückgeschleudert wird </summary>
+    public float power;
 
     //Constructor
-    DamageReturn(float _damage, Vector2 _power)
+
+    /// <param name="_damage">Abzug der Lebenspunkte</param>
+    /// <param name="_angle">Winkel, mit dem das gegnerische objekt zurückgeschleudert wird</param>
+    /// <param name="_power">Kraftmagnitude, mit der das gegnerische Objekt zuurückgeschleudert wird</param>
+    public DamageReturn(float _damage, float _angle, float _power)
     {
         damage = _damage;
+        angle = _angle;
         power = _power;
     }
 }

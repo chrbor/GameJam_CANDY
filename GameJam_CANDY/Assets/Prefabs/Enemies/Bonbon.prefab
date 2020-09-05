@@ -99,7 +99,7 @@ MonoBehaviour:
   active: 1
   lifepoints: 0
   contactDamage: 0
-  power: 300
+  power: 1500
   weapon: {fileID: 0}
   jumpAngle_min: 20
   jumpAngle_max: 40

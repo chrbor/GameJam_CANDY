@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using static GameManager;
+using static AdditionalTools;
 
 public class PlayerScript : CharScript
 {
@@ -53,6 +54,7 @@ public class PlayerScript : CharScript
     /// </summary>
     private void PlayerControl()
     {
+        anim.SetInteger("dive", (int)Mathf.Sign(transform.localScale.x));
 
         //Checke Hechtrolle:
         if ((Input.GetKey(KeyCode.Space) && !inAir) || blockDive)
@@ -106,7 +108,7 @@ public class PlayerScript : CharScript
     /// <returns></returns>
     private IEnumerator DoDive(float factor)
     {
-        anim.SetInteger("dive", (int)Mathf.Sign(factor));
+        //anim.SetInteger("dive", (int)Mathf.Sign(factor));
         anim.SetTrigger("doDive");
         float t = 0;
         while(t < 0.25f)
@@ -153,7 +155,19 @@ public class PlayerScript : CharScript
         DamageReturn dmgCaused = other.GetComponent<IDamageCausing>().CauseDamage(gameObject);
 
         lifepoints -= dmgCaused.damage;
-        if (lifepoints <= 0) { manager.GameOver(); Play_Death(); }
+        rb.AddForce(RotToVec(dmgCaused.angle) * dmgCaused.power);
+        StartCoroutine(PlayHit());
+        if (lifepoints < 0) { manager.GameOver(); Play_Death(); }
+    }
+
+    IEnumerator PlayHit()
+    {
+
+        anim.SetInteger("hit", anim.GetInteger("hit") + 1);
+        yield return new WaitForSeconds(0.2f);
+        anim.SetInteger("hit", anim.GetInteger("hit") - 1);
+        yield break;
+
     }
 
     public override void Play_Death()

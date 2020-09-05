@@ -4,7 +4,7 @@ using UnityEngine;
 using static GameManager;
 using static AdditionalTools;
 
-public class BonbonScript : CharScript
+public class BonbonScript : CharScript, IDamageCausing
 {
     bool onGround;
     bool jumping;
@@ -91,5 +91,14 @@ public class BonbonScript : CharScript
         rb.AddForce(puls);
         jumping = false;
         yield break;
+    }
+
+    public DamageReturn CauseDamage(GameObject enemy)
+    {
+        Vector2 diff = enemy.transform.position - transform.position;
+
+        DamageReturn dmg = new DamageReturn(contactDamage, 90 + (diff.x > 0? -60:60), power);
+
+        return dmg;
     }
 }
