@@ -77,7 +77,7 @@ public class BonbonScript : CharScript, IDamageCausing
         while(counter < prepTime)
         {
             //Falls Bonbon vom Platz geschubst wird, dann breche Jump ab
-            if (!onGround) { transform.localScale = Vector3.one * activeScale; jumping = false; coll.radius = 0.5f * activeScale; yield break; }
+            if (!onGround || !active) { transform.localScale = Vector3.one * activeScale; jumping = false; coll.radius = 0.5f * activeScale; yield break; }
 
             //Stauche Sprite, um Antizipation aufzubauen:
             percent = 0.5f * counter / prepTime;
@@ -101,4 +101,42 @@ public class BonbonScript : CharScript, IDamageCausing
 
         return dmg;
     }
+
+    public override void Play_Death()
+    {
+        if (!active) return;
+        active = false;
+        StartCoroutine(Playing_Death());
+    }
+
+    IEnumerator Playing_Death()
+    {
+        float rotation = Random.Range(1f, 10f) * Mathf.Sign(Random.Range(-1f, 1f));
+        transform.GetChild(2).gameObject.SetActive(true);
+
+        for(float count = 0; count < 0.5f; count += Time.deltaTime)
+        {
+            transform.Rotate(Vector3.forward, rotation);
+            yield return new WaitForEndOfFrame();
+        }
+
+        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+        sprite.sprite = Resources.Load<Sprite>("Wolke" + Random.Range(1, 5));
+        Destroy(transform.GetChild(0).gameObject);
+        GetComponent<CircleCollider2D>().enabled = false;
+        rb.bodyType = RigidbodyType2D.Static;
+        //yield return new WaitForSeconds(3);
+
+        float change;
+        for (float count = 0; count < 0.5f; count += Time.deltaTime)
+        {
+            change = Time.deltaTime * 2;
+            sprite.color -= Color.black * change;
+            transform.localScale += Vector3.one * change;
+            yield return new WaitForEndOfFrame();
+        }
+        Destroy(gameObject);
+        yield break;
+    }
+
 }

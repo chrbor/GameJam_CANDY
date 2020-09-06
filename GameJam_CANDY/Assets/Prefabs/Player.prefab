@@ -258,7 +258,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e8f51f2979010049b0dd4df2c76a5da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 1
   lifepoints: 0
+  contactDamage: 0
+  power: 0
   weapon: {fileID: 0}
   acceleration: 20
   maxSpeed: 8

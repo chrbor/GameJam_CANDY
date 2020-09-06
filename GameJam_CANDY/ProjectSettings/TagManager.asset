@@ -10,6 +10,7 @@ TagManager:
   - Hitbox
   - Collectable
   - Caddy
+  - CandyTrigger
   layers:
   - Default
   - TransparentFX
@@ -29,8 +30,8 @@ TagManager:
   - Caddy
   - CaddyBox
   - Background
-  - 
-  - 
+  - EnemyTrigger
+  - Weapon
   - 
   - 
   - 

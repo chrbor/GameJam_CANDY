@@ -7,6 +7,7 @@ using static AdditionalTools;
 public class PlayerScript : CharScript
 {
     private Animator anim;
+    private bool attacking;
 
     [Header("Movement:")]
     /// <summary> Bestimmt, wie schnell der Char bechleunigen kann </summary>
@@ -27,8 +28,11 @@ public class PlayerScript : CharScript
     private float jumpCounter;
     /// <summary> Wenn wahr, dann wird gerade eine Hechtrolle ausgeführt </summary>
     private bool blockDive;
+    /// <summary> Wenn wahr, dann kann der Char nicht gesteuert werden </summary>
+    private bool blockControl;
     /// <summary> Wenn wahr, dann ist der Char in der Luft, wenn falsch, dann ist er auf dem Boden </summary>
     private bool inAir;
+
 
     // Start is called before the first frame update
     void Start()
@@ -38,26 +42,34 @@ public class PlayerScript : CharScript
         jumpCounter = jumpPower;
     }
 
+
     // Update is called once per frame
     void Update()
     {
-        if (!run) return;
-
         //Checke ob in der Luft:
         inAir = !Physics2D.Raycast(transform.position, Vector2.down, 1.6f, rMask).collider;
+        anim.SetBool("inAir", inAir);
+        //anim.SetInteger("dive", (int)Mathf.Sign(rb.velocity.x));
+
+        if (!run || blockControl) return;
+
+
 
         PlayerControl();
     }
+
+    public void ActivateControl() { blockControl = false; }
 
     /// <summary>
     /// Steuerung des Spielers
     /// </summary>
     private void PlayerControl()
     {
-        anim.SetInteger("dive", (int)Mathf.Sign(transform.localScale.x));
+        anim.SetInteger("dive", (int)Mathf.Sign(rb.velocity.x));
+
 
         //Checke Hechtrolle:
-        if ((Input.GetKey(KeyCode.Space) && !inAir) || blockDive)
+        if ((Input.GetKey(KeyCode.LeftShift) && !inAir) || blockDive)
         {
             jumpCounter = 0;
             if (!blockDive)
@@ -69,6 +81,7 @@ public class PlayerScript : CharScript
             return;
         }
 
+
         //Checke Sprung:
         if(Input.GetKey(KeyCode.W) && jumpCounter > 0)
         {
@@ -76,6 +89,7 @@ public class PlayerScript : CharScript
             rb.velocity = jumpCounter == jumpPower ? new Vector2(rb.velocity.x, jumpCounter) : rb.velocity + Vector2.up * jumpCounter;
             jumpCounter--;
         }
+        
 
         //Checke Bewegung:
         if(Input.GetKey(KeyCode.D) == Input.GetKey(KeyCode.A))
@@ -93,8 +107,17 @@ public class PlayerScript : CharScript
                 rb.velocity += Vector2.right * dir * acceleration * Time.deltaTime;
         }
 
+
+        //Checke Attacke:
+        if (Input.GetKey(KeyCode.Space) && !attacking)
+        {
+            attacking = true;
+            StartCoroutine(PlayAttack());
+        }
+
+
         //Fallanimation:
-        anim.SetBool("inAir", inAir);
+        //anim.SetBool("inAir", inAir);
         if (inAir)
             anim.SetBool("falling", rb.velocity.y < 0);
         else
@@ -130,19 +153,23 @@ public class PlayerScript : CharScript
     {
         if (other.CompareTag("Collectable"))
         {
+            weapon = other.gameObject;
+
             CollBase coll = other.GetComponent<CollBase>();
-            other.transform.parent = right_Hand.transform;
-            other.transform.localScale = Vector3.one * coll.display.size_inHand;
-            other.transform.localPosition = new Vector2(coll.display.handPos_x, coll.display.handPos_y);
-            other.transform.eulerAngles = Vector3.forward * (right_Hand.transform.eulerAngles.z + Mathf.Sign(transform.localScale.x) * coll.display.handAngle);
+            weapon.transform.parent = right_Hand.transform;
+            weapon.transform.localScale = Vector3.one * coll.display.size_inHand;
+            weapon.transform.localPosition = new Vector2(coll.display.handPos_x, coll.display.handPos_y);
+            weapon.transform.eulerAngles = Vector3.forward * (right_Hand.transform.eulerAngles.z + Mathf.Sign(transform.localScale.x) * coll.display.handAngle);
 
-            other.GetComponent<CircleCollider2D>().enabled = false;
+            weapon.GetComponent<CircleCollider2D>().enabled = false;
 
-            Destroy(other.GetComponent<Rigidbody2D>());
+            //Destroy(other.GetComponent<Rigidbody2D>());
+            weapon.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+            weapon.layer = 19;//Waffen- Layer
 
             coll.display.anim.SetBool("onGround", false);
 
-            SpriteRenderer sprite = other.transform.GetChild(0).GetComponent<SpriteRenderer>();
+            SpriteRenderer sprite = weapon.transform.GetChild(0).GetComponent<SpriteRenderer>();
             sprite.sortingLayerName = "Player";
             sprite.sortingOrder = 4;
 
@@ -151,12 +178,15 @@ public class PlayerScript : CharScript
             return;
         }
 
-        if (other.CompareTag("Candy") && !other.GetComponent<CharScript>().active) return;//Trigger, um Candy zu aktivieren
+        if (!other.CompareTag("Candy")) return;//Trigger, um Candy zu aktivieren
         DamageReturn dmgCaused = other.GetComponent<IDamageCausing>().CauseDamage(gameObject);
 
         lifepoints -= dmgCaused.damage;
+        anim.SetInteger("dive", (int)Mathf.Sign(dmgCaused.angle - 90));
         rb.AddForce(RotToVec(dmgCaused.angle) * dmgCaused.power);
-        StartCoroutine(PlayHit());
+
+        //blockControl = true;
+        //StartCoroutine(PlayHit());
         if (lifepoints < 0) { manager.GameOver(); Play_Death(); }
     }
 
@@ -166,8 +196,30 @@ public class PlayerScript : CharScript
         anim.SetInteger("hit", anim.GetInteger("hit") + 1);
         yield return new WaitForSeconds(0.2f);
         anim.SetInteger("hit", anim.GetInteger("hit") - 1);
+
+        //Bypass Bug (needs to be fixed!)
+        yield return new WaitForSeconds(3);
+        ActivateControl();
         yield break;
 
+    }
+
+    IEnumerator PlayAttack()
+    {
+        Debug.Log("attack");
+        Weapon _weapon = weapon.GetComponent<CollBase>().weapon;
+        weapon.GetComponent<Collider2D>().enabled = true;
+
+        anim.SetTrigger(_weapon.animTrigger);
+        weapon.transform.GetChild(2).gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.25f);
+        weapon.transform.GetChild(2).gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(_weapon.reload);
+        weapon.GetComponent<Collider2D>().enabled = false;
+
+        attacking = false;
+        yield break;
     }
 
     public override void Play_Death()

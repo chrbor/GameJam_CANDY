@@ -60,6 +60,8 @@ public class Weapon
     public float power;
     /// <summary> Krafteinwirkung auf Spieler bei Fire() </summary>
     public float recoil;
+    /// <summary> Der Name des Triggers, der die Animation auslöst </summary>
+    public string animTrigger;
     /// <summary> Die Anzahl an getroffenen Schlägen, bis die Waffe auseinanderbricht </summary>
     public float breakingPoint;
     /// <summary> aktuelle Zahl der getroffenen Schläge </summary>
