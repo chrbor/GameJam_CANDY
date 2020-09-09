@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 6950137605253099894}
   - component: {fileID: 6950137605253099895}
   - component: {fileID: -3658527332677939758}
-  m_Layer: 0
+  - component: {fileID: -2737309980692009802}
+  m_Layer: 21
   m_Name: Rolltreppe_links_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,10 +115,31 @@ PlatformEffector2D:
   m_ColliderMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RotationalOffset: 0
+  m_RotationalOffset: -45
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 135
+  m_SurfaceArc: 180
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!50 &-2737309980692009802
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6950137605253099888}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

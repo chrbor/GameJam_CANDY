@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager manager;
 
     /// <summary> Mask für den Raycast, um Bodenkontakt festzustellen </summary>
-    public static int rMask = (1 << 10) | (1 << 15);//Kontakt mit Ground und Einkaufswagen
+    public static int rMask = (1 << 10) | (1 << 15) | (1 << 21);//Kontakt mit Ground, Einkaufswagen und Slant
     /// <summary> Das Ziel aller Süßwaren </summary>
     public GameObject caddy;
     /// <summary> Der Spiel- Charakter </summary>

@@ -52,7 +52,14 @@ public class Baguette : CollBase
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Candy")) return;
-        hitting = true;
+        if (!hitting)
+        {
+            hitting = true;
+            weapon.health--;
+            if (weapon.health > 0)
+                gameMenu.SetWeaponHealth(weapon.health);
+            else GetDestroyed();
+        }
 
         float x_diff = other.transform.position.x - transform.position.x;
 
@@ -77,17 +84,7 @@ public class Baguette : CollBase
         GetComponent<Collider2D>().enabled = false;
 
         attacking = false;
-        if (hitting)
-        {
-            weapon.health--;
-            if(weapon.health > 0)
-                gameMenu.SetHealth(--weapon.health);
-            else
-            {
-                GetDestroyed();
-            }
-        }
-
+        hitting = false;
         yield break;
     }
 }

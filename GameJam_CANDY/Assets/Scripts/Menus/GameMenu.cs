@@ -51,7 +51,6 @@ public class GameMenu : MenuScript
         weaponImage.sprite = weapon.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
         weaponHealth.SetActive(true);
         SetWeaponHealth(weapon.GetComponent<CollBase>().weapon.health);
-        StartCoroutine(ShowWeaponHealth());
     }
 
     public void SetWeaponHealth(int health)
@@ -59,28 +58,33 @@ public class GameMenu : MenuScript
         weaponText.text = ": " + health.ToString();
     }
 
-    IEnumerator ShowWeaponHealth()
+    public IEnumerator ShowWeaponHealth()
     {
+        weaponHealth.gameObject.SetActive(false);
         stopRoutine = true;
         yield return new WaitForEndOfFrame();
         stopRoutine = false;
+        weaponHealth.gameObject.SetActive(true);
+
 
         CanvasGroup _weaponHealth = weaponHealth.GetComponent<CanvasGroup>();
-        for (float count = 0; count < 1 || stopRoutine; count += Time.deltaTime) { _weaponHealth.alpha += Time.deltaTime; yield return new WaitForEndOfFrame(); }
-        if (stopRoutine) yield break;
-        if (_weaponHealth.alpha <= 0) weaponHealth.SetActive(false);
+        _weaponHealth.alpha = 0;
+        for (float count = 0; count < 1 || stopRoutine; count += Time.fixedDeltaTime) { _weaponHealth.alpha += Time.fixedDeltaTime; yield return new WaitForFixedUpdate(); }
         yield break;
     }
 
-    IEnumerator HideWeaponHealth()
+    public IEnumerator HideWeaponHealth()
     {
+        weaponHealth.gameObject.SetActive(false);
         stopRoutine = true;
         yield return new WaitForEndOfFrame();
         stopRoutine = false;
+        weaponHealth.gameObject.SetActive(true);
+
 
         CanvasGroup _weaponHealth = weaponHealth.GetComponent<CanvasGroup>();
-        for (float count = 0; count < 1 || stopRoutine; count += Time.deltaTime) { _weaponHealth.alpha -= Time.deltaTime; yield return new WaitForEndOfFrame(); }
-        if (stopRoutine) yield break;
+        _weaponHealth.alpha = 1;
+        for (float count = 0; count < 1 || stopRoutine; count += Time.fixedDeltaTime) { _weaponHealth.alpha -= Time.fixedDeltaTime; yield return new WaitForFixedUpdate(); }
         yield break;
     }
 }

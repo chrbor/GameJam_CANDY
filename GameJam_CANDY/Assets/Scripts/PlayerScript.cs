@@ -136,7 +136,7 @@ public class PlayerScript : CharScript
         if(Input.GetKey(KeyCode.E) && !blockDropCollect)
         {
             blockDropCollect = true;
-            if(weapon) weapon.GetComponent<CollBase>().Drop();
+            if (weapon) { weapon.GetComponent<CollBase>().Drop(); if (!collectFocus) StartCoroutine(gameMenu.HideWeaponHealth()); }
         }
         if (!Input.GetKey(KeyCode.E)) blockDropCollect = false;
 
@@ -158,6 +158,7 @@ public class PlayerScript : CharScript
     {
         //anim.SetInteger("dive", (int)Mathf.Sign(factor));
         anim.SetTrigger("doDive");
+        gameObject.layer = 11;//Objekt
         float t = 0;
         while(t < 0.25f)
         {
@@ -165,6 +166,7 @@ public class PlayerScript : CharScript
             rb.position += Vector2.right * factor * maxSpeed * 1.5f * Time.fixedDeltaTime;
             yield return new WaitForFixedUpdate();
         }
+        gameObject.layer = 8;//Player
         blockDive = false;
         yield break;
     }
@@ -218,7 +220,6 @@ public class PlayerScript : CharScript
             //hier positionieren
             yield return new WaitForEndOfFrame();
         }
-        Debug.Log("outofloop");
         if (collectFocus != currentFocus) yield break;
         yield return new WaitUntil(() => blockDropCollect);//Warte darauf die aktuelle Waffe fallen zu lassen
 
@@ -242,6 +243,7 @@ public class PlayerScript : CharScript
 
         coll.Highlight.SetActive(false);
         gameMenu.SetNewWeapon(weapon);
+        StartCoroutine(gameMenu.ShowWeaponHealth());
 
         yield return new WaitUntil(() => !Input.GetKey(KeyCode.E));
         collectFocus = null;

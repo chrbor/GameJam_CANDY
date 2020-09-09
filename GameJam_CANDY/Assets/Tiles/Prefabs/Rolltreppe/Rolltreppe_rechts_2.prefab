@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 343670236945907827}
   - component: {fileID: 2793409595280439620}
   - component: {fileID: 4504787963958323979}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Rolltreppe_rechts_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

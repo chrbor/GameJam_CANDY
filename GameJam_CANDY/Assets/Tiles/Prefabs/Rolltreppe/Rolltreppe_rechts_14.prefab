@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7722466317247060309}
   - component: {fileID: 7722466317247060310}
   - component: {fileID: -1334546496701903597}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Rolltreppe_rechts_14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,10 +114,10 @@ PlatformEffector2D:
   m_ColliderMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RotationalOffset: 0
+  m_RotationalOffset: 45
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 135
+  m_SurfaceArc: 180
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
