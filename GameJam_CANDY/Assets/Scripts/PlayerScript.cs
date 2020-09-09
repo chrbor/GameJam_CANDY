@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using static GameManager;
+using static GameMenu;
 using static AdditionalTools;
 
 public class PlayerScript : CharScript
 {
-    private Animator anim;
+    [HideInInspector]
+    public Animator anim;
     private bool attacking;
 
     [Header("Movement:")]
@@ -33,6 +35,11 @@ public class PlayerScript : CharScript
     /// <summary> Wenn wahr, dann ist der Char in der Luft, wenn falsch, dann ist er auf dem Boden </summary>
     private bool inAir;
 
+    //Collect-Control:
+    /// <summary> Wenn wahr, dann kann der Spieler keine Objekte aufsammeln/fallen lassen </summary>
+    private bool blockDropCollect;
+    /// <summary> Wenn wahr dann ist der Spieler in der Nähe eines Collectables und kann es aufnehmen </summary>
+    private GameObject collectFocus;
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +66,15 @@ public class PlayerScript : CharScript
     }
 
     public void ActivateControl() { blockControl = false; }
+
+    public IEnumerator Eat(int addedHealth)
+    {
+        anim.SetTrigger("a_Eat");
+        yield return new WaitForSeconds(0.5f);
+        lifepoints += addedHealth;
+        if (lifepoints <= 0) Play_Death();
+        yield break;
+    }
 
     /// <summary>
     /// Steuerung des Spielers
@@ -109,11 +125,20 @@ public class PlayerScript : CharScript
 
 
         //Checke Attacke:
-        if (Input.GetKey(KeyCode.Space) && !attacking)
+        if (Input.GetKey(KeyCode.Space) && weapon)
         {
             attacking = true;
-            StartCoroutine(PlayAttack());
+            weapon.GetComponent<CollBase>().Fire();
+            if (weapon.GetComponent<CollBase>().weapon.isProjectile) weapon = null;
         }
+
+        //Checke ob Waffe fallen gelassen wird:
+        if(Input.GetKey(KeyCode.E) && !blockDropCollect)
+        {
+            blockDropCollect = true;
+            if(weapon) weapon.GetComponent<CollBase>().Drop();
+        }
+        if (!Input.GetKey(KeyCode.E)) blockDropCollect = false;
 
 
         //Fallanimation:
@@ -145,39 +170,8 @@ public class PlayerScript : CharScript
     }
 
 
-    /// <summary>
-    /// Trigger ist nur die Hitbox. Wenn die Hitbox ausgelöst wird, dann wird entweder Schaden genommen oder etwas aufgesammelt
-    /// </summary>
-    /// <param name="other"></param>
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Collectable"))
-        {
-            weapon = other.gameObject;
-
-            CollBase coll = other.GetComponent<CollBase>();
-            weapon.transform.parent = right_Hand.transform;
-            weapon.transform.localScale = Vector3.one * coll.display.size_inHand;
-            weapon.transform.localPosition = new Vector2(coll.display.handPos_x, coll.display.handPos_y);
-            weapon.transform.eulerAngles = Vector3.forward * (right_Hand.transform.eulerAngles.z + Mathf.Sign(transform.localScale.x) * coll.display.handAngle);
-
-            weapon.GetComponent<CircleCollider2D>().enabled = false;
-
-            //Destroy(other.GetComponent<Rigidbody2D>());
-            weapon.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-            weapon.layer = 19;//Waffen- Layer
-
-            coll.display.anim.SetBool("onGround", false);
-
-            SpriteRenderer sprite = weapon.transform.GetChild(0).GetComponent<SpriteRenderer>();
-            sprite.sortingLayerName = "Player";
-            sprite.sortingOrder = 4;
-
-            coll.light.SetActive(false);
-
-            return;
-        }
-
         if (!other.CompareTag("Candy")) return;//Trigger, um Candy zu aktivieren
         DamageReturn dmgCaused = other.GetComponent<IDamageCausing>().CauseDamage(gameObject);
 
@@ -187,44 +181,89 @@ public class PlayerScript : CharScript
 
         //blockControl = true;
         //StartCoroutine(PlayHit());
-        if (lifepoints < 0) { manager.GameOver(); Play_Death(); }
+
+        //Spiele Animationen ab:
+        StartCoroutine(Camera.main.GetComponent<CameraScript>().Shake());
+        StartCoroutine(gameMenu.HitOverlay());
+        gameMenu.SetHealth(lifepoints);
+        if (lifepoints <= 0) { manager.GameOver(); Play_Death(); }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (!other.CompareTag("Collectable")) return;
+        
+        if (blockDropCollect || collectFocus) return;
+        collectFocus = other.transform.parent.gameObject;
+
+        StartCoroutine(Collect(collectFocus));
+        return;      
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.transform.parent && other.transform.parent.gameObject == collectFocus) collectFocus = null;
+    }
+
+    /// <summary>
+    /// Fokust das Objekt, damit der Spieler es mit Tastendruck aufnehmen kann
+    /// </summary>
+    /// <param name="_weapon"></param>
+    /// <returns></returns>
+    IEnumerator Collect(GameObject _weapon)
+    {
+        GameObject currentFocus = collectFocus;
+        while(collectFocus == currentFocus && !Input.GetKey(KeyCode.E))
+        {
+            //hier positionieren
+            yield return new WaitForEndOfFrame();
+        }
+        Debug.Log("outofloop");
+        if (collectFocus != currentFocus) yield break;
+        yield return new WaitUntil(() => blockDropCollect);//Warte darauf die aktuelle Waffe fallen zu lassen
+
+        weapon = _weapon.gameObject;
+
+        CollBase coll = weapon.GetComponent<CollBase>();
+        weapon.transform.parent = right_Hand.transform;
+        weapon.transform.localScale = Vector3.one * coll.display.size_inHand;
+        weapon.transform.localPosition = new Vector2(coll.display.handPos_x, coll.display.handPos_y);
+        weapon.transform.eulerAngles = Vector3.forward * (right_Hand.transform.eulerAngles.z + Mathf.Sign(transform.localScale.x) * coll.display.handAngle);
+        weapon.GetComponent<CircleCollider2D>().enabled = false;
+
+        //Destroy(other.GetComponent<Rigidbody2D>());
+        weapon.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        weapon.layer = 19;//Waffen- Layer
+
+        coll.display.anim.SetBool("onGround", false);
+        SpriteRenderer sprite = weapon.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        sprite.sortingLayerName = "Player";
+        sprite.sortingOrder = 4;
+
+        coll.Highlight.SetActive(false);
+        gameMenu.SetNewWeapon(weapon);
+
+        yield return new WaitUntil(() => !Input.GetKey(KeyCode.E));
+        collectFocus = null;
+        yield break;
     }
 
     IEnumerator PlayHit()
     {
-
         anim.SetInteger("hit", anim.GetInteger("hit") + 1);
         yield return new WaitForSeconds(0.2f);
         anim.SetInteger("hit", anim.GetInteger("hit") - 1);
 
-        //Bypass Bug (needs to be fixed!)
+        //Bypass Falling- Bug (needs to be fixed!)
         yield return new WaitForSeconds(3);
         ActivateControl();
         yield break;
 
     }
 
-    IEnumerator PlayAttack()
-    {
-        Debug.Log("attack");
-        Weapon _weapon = weapon.GetComponent<CollBase>().weapon;
-        weapon.GetComponent<Collider2D>().enabled = true;
-
-        anim.SetTrigger(_weapon.animTrigger);
-        weapon.transform.GetChild(2).gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.25f);
-        weapon.transform.GetChild(2).gameObject.SetActive(false);
-
-        yield return new WaitForSeconds(_weapon.reload);
-        weapon.GetComponent<Collider2D>().enabled = false;
-
-        attacking = false;
-        yield break;
-    }
-
     public override void Play_Death()
     {
-        Debug.Log("Player died");
+        Debug.Log("Player died and now needs a diet ;D");
 
     }
 }

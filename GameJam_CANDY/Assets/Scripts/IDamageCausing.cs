@@ -18,7 +18,7 @@ public interface IDamageCausing
 public class DamageReturn
 {
     /// <summary> Der Schaden, der zugefügt wurde </summary>
-    public float damage;
+    public int damage;
     /// <summary> Die Kraftrichtung, mit der das getroffene Objekt zurückgeschleudert wird </summary>
     public float angle;
     /// <summary> Die Kraftmagnitude, mit der das getroffene Objekt zurückgeschleudert wird </summary>
@@ -29,7 +29,7 @@ public class DamageReturn
     /// <param name="_damage">Abzug der Lebenspunkte</param>
     /// <param name="_angle">Winkel, mit dem das gegnerische objekt zurückgeschleudert wird</param>
     /// <param name="_power">Kraftmagnitude, mit der das gegnerische Objekt zuurückgeschleudert wird</param>
-    public DamageReturn(float _damage, float _angle, float _power)
+    public DamageReturn(int _damage, float _angle, float _power)
     {
         damage = _damage;
         angle = _angle;

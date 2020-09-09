@@ -103,8 +103,8 @@ TrailRenderer:
       serializedVersion: 2
       key0: {r: 0.6808473, g: 0.9433962, b: 0.69945306, a: 0}
       key1: {r: 0.40161088, g: 0.8962264, b: 0.43659678, a: 0}
-      key2: {r: 0.259167, g: 0.6037736, b: 0.31015438, a: 1}
-      key3: {r: 0, g: 0, b: 0, a: 1}
+      key2: {r: 0.259167, g: 0.6037736, b: 0.31015438, a: 0.43137255}
+      key3: {r: 0, g: 0, b: 0, a: 0.43137255}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
@@ -131,7 +131,7 @@ TrailRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 3
+    textureMode: 2
     shadowBias: 0.5
     generateLightingData: 0
   m_MinVertexDistance: 0.1
@@ -268,9 +268,12 @@ MonoBehaviour:
     power: 500
     recoil: 0
     animTrigger: a_swing
-    breakingPoint: 20
-    breakPointCount: 0
-  light: {fileID: 5350767297057834542}
+    maxHealth: 0
+    health: 0
+  item:
+    consumable: 0
+    healthFactor: 0
+  Highlight: {fileID: 5350767297057834542}
 --- !u!1 &5350767296407714129
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,9 +389,10 @@ GameObject:
   - component: {fileID: 5350767297057834547}
   - component: {fileID: 5350767297057834545}
   - component: {fileID: 5350767297057834546}
-  m_Layer: 11
+  - component: {fileID: 4146252377075304716}
+  m_Layer: 20
   m_Name: Shine
-  m_TagString: Untagged
+  m_TagString: Collectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5203,3 +5207,19 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!58 &4146252377075304716
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5350767297057834542}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1

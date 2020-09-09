@@ -12,9 +12,9 @@ public abstract class CharScript : MonoBehaviour
     /// <summary> gibt an, ob das Objekt aktiv ist </summary>
     public bool active = true;
     /// <summary> Lebenspunkte der Einheit </summary>
-    public float lifepoints;
+    public int lifepoints;
     /// <summary> Schaden, der bei Kontakt dem Gegner zugefügt wird </summary>
-    public float contactDamage;
+    public int contactDamage;
     /// <summary> Die Kraft, die dem Gegner bei Kontakt zugefügt wird </summary>
     public float power;
     /// <summary> Die Waffe, die die Einheit aktuell besitzt </summary>

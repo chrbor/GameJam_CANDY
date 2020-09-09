@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public GameObject caddy;
     /// <summary> Der Spiel- Charakter </summary>
     public GameObject player;
+    /// <summary> Das aktuelle MenuScript </summary>
+    public MenuScript menu;
     /// <summary> Wenn wahr, dann läuft das Spiel weiter, wenn falsch, dann stoppt das Spiel </summary>
     public static bool run = true;
 
@@ -37,5 +39,6 @@ public class GameManager : MonoBehaviour
     {
         caddy = GameObject.FindGameObjectWithTag("Caddy");
         player = GameObject.FindGameObjectWithTag("Player");
+        menu = GameObject.Find("Canvas").GetComponent<MenuScript>();
     }
 }

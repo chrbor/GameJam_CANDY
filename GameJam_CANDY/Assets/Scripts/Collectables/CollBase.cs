@@ -11,12 +11,22 @@ public abstract class CollBase : MonoBehaviour
     [SerializeField]
     public Weapon weapon;
 
-    public GameObject light;
+    [SerializeField]
+    public Item item;
+
+    public GameObject Highlight;
+    protected Rigidbody2D rb;
+    /// <summary> Collider, damit das Objekt nicht durch die Welt fällt </summary>
+    protected CircleCollider2D coll;
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
+        coll = GetComponent<CircleCollider2D>();
         display.anim = transform.GetChild(0).GetComponent<Animator>();
         //display.anim.SetBool("onGround", false);
+
+        weapon.health = weapon.maxHealth;
     }
 
     /// <summary>
@@ -25,6 +35,30 @@ public abstract class CollBase : MonoBehaviour
     public virtual void Fire()
     {
         Debug.Log("'Fire()' nicht implementiert");
+    }
+
+    /// <summary>
+    /// Lässt die Waffe fallen
+    /// </summary>
+    public virtual void Drop()
+    {
+        Debug.Log("'Drop()' nicht implementiert");
+    }
+
+    /// <summary>
+    /// Waffe wird zerstört
+    /// </summary>
+    public virtual void GetDestroyed()
+    {
+        Debug.Log("'GetDestroyed()' nicht implementiert");
+    }
+
+    /// <summary>
+    /// Waffe wird gegessen
+    /// </summary>
+    public virtual void Eat()
+    {
+        Debug.Log("'Eat()' nicht implementiert");
     }
 }
 
@@ -53,7 +87,7 @@ public class Weapon
     public bool isProjectile;
 
     /// <summary> Schadenspunkte bei Treffer </summary>
-    public float damage;
+    public int damage;
     /// <summary> Abklingzeit in Sekunden, bis die Waffe wieder verwendet werden kann </summary>
     public float reload;
     /// <summary> Krafteinwirkung auf Gegner bei Treffer </summary>
@@ -62,9 +96,18 @@ public class Weapon
     public float recoil;
     /// <summary> Der Name des Triggers, der die Animation auslöst </summary>
     public string animTrigger;
+    /// <summary> Die maximale Anzahl an getroffenen Schlägen, die die Waffe aushält </summary>
+    public int maxHealth;
     /// <summary> Die Anzahl an getroffenen Schlägen, bis die Waffe auseinanderbricht </summary>
-    public float breakingPoint;
-    /// <summary> aktuelle Zahl der getroffenen Schläge </summary>
     [HideInInspector]
-    public float breakPointCount;
+    public int health;
+}
+
+[System.Serializable]
+public class Item
+{
+    /// <summary> Wenn wahr, dann kann das Objekt gegen Leben eingetauscht werden </summary>
+    public bool consumable;
+    /// <summary> Anzahl der Leben pro weapon.health, die der Spieler erhält, wenn er das Objekt konsumiert</summary>
+    public float healthFactor;
 }

@@ -13,6 +13,8 @@ public class CameraScript : MonoBehaviour
     /// <summary> Differenz der Positionen zwischen der Kamera und dem focus </summary>
     private Vector2 diff;
 
+    private bool shaking;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,5 +28,19 @@ public class CameraScript : MonoBehaviour
 
         transform.position += (Vector3)(diff * diff * diff / (diff.SqrMagnitude() * damping));
 
+    }
+
+    public IEnumerator Shake()
+    {
+        if (shaking) yield break;
+        shaking = true;
+        float strength = Camera.main.orthographicSize * 0.02f;
+        for(float count = 0; count < 0.4f; count += Time.deltaTime)
+        {
+            transform.position += (Vector3)Random.insideUnitCircle * strength;
+            yield return new WaitForEndOfFrame();
+        }
+        shaking = false;
+        yield break;
     }
 }

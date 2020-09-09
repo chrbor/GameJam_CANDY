@@ -21,10 +21,14 @@ public class BonbonScript : CharScript, IDamageCausing
     /// <summary> Größe des Bonbons, wenn inaktiv </summary>
     private float inactiveScale;
 
+    private GameObject face;
+
     private void Start()
     {
         inactiveScale = transform.localScale.x;
         active = true;
+
+        face = transform.GetChild(0).gameObject;
     }
 
     void Update()
