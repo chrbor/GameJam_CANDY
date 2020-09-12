@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static GameController;
 
 public class GameMenu : MenuScript
 {
@@ -9,23 +10,34 @@ public class GameMenu : MenuScript
 
     private GameObject hud;
     private Slider healthbar;
+    private Text healthInfo;
+    private Slider caddySlider;
+    private Text caddyInfo;
     private GameObject weaponHealth;
-    private Text weaponText;
+    private Slider weaponSlider;
+    private Text weaponInfo;
     private Image weaponImage;
 
     private bool stopRoutine;
 
     // Start is called before the first frame update
-    void Start()
+    new void Awake()
     {
+        base.Awake();
+
         gameMenu = this;
 
         hud = transform.Find("HUD").gameObject;
-        healthbar = hud.transform.GetChild(0).GetComponent<Slider>();
-        healthbar.value = 100;
-        weaponHealth = hud.transform.GetChild(1).gameObject;
-        weaponText = weaponHealth.transform.GetChild(1).GetComponent<Text>();
-        weaponImage = weaponHealth.transform.GetChild(0).GetComponent<Image>();
+        healthbar = hud.transform.Find("Health").GetComponent<Slider>();
+        healthInfo = healthbar.transform.Find("Info").GetComponent<Text>();
+
+        caddySlider = hud.transform.Find("Caddy").GetComponent<Slider>();
+        caddyInfo = caddySlider.transform.Find("Info").GetComponent<Text>();
+
+        weaponHealth = hud.transform.Find("Weapon").gameObject;
+        weaponInfo = weaponHealth.transform.Find("Info").GetComponent<Text>();
+        weaponSlider = weaponHealth.GetComponent<Slider>();
+        weaponImage = weaponHealth.transform.Find("Image").GetComponent<Image>();
 
         weaponHealth.SetActive(false);
     }
@@ -37,9 +49,30 @@ public class GameMenu : MenuScript
     public void SetHealth(int healthbar_left)
     {
         healthbar.value = healthbar_left;
+        healthInfo.text = healthbar_left.ToString() + "/100"; 
         if (healthbar_left <= 0) StartCoroutine(HideWeaponHealth());
 
         //Hier der Code um die Leiste langsam zu dem neuen Wert übergehen zu lassen P:
+    }
+    
+    /// <summary>
+    /// Aktualisiert die Einkaufsleiste
+    /// </summary>
+    /// <param name="healthbar_left"></param>
+    public void SetCaddyHealth(int caddyHealth_left)
+    {
+        caddySlider.value = caddyHealth_left;
+        caddyInfo.text = caddyHealth_left.ToString() + "/" + gameController.candyLimit; 
+        if (caddyHealth_left <= 0) StartCoroutine(HideWeaponHealth());
+
+        //Hier der Code um die Leiste langsam zu dem neuen Wert übergehen zu lassen P:
+    }
+
+    public void SetNewCaddy()
+    {
+        caddySlider.maxValue = gameController.candyLimit;
+        gameController.candyCount = gameController.candyLimit;
+        SetCaddyHealth(gameController.candyLimit);
     }
 
     /// <summary>
@@ -50,12 +83,14 @@ public class GameMenu : MenuScript
     {
         weaponImage.sprite = weapon.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
         weaponHealth.SetActive(true);
+        weaponSlider.maxValue = weapon.GetComponent<CollBase>().weapon.maxHealth;
         SetWeaponHealth(weapon.GetComponent<CollBase>().weapon.health);
     }
 
     public void SetWeaponHealth(int health)
     {
-        weaponText.text = ": " + health.ToString();
+        weaponSlider.value = health;
+        weaponInfo.text = health.ToString() + "/" + weaponSlider.maxValue.ToString();
     }
 
     public IEnumerator ShowWeaponHealth()

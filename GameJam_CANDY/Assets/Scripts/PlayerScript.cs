@@ -10,6 +10,7 @@ public class PlayerScript : CharScript
     [HideInInspector]
     public Animator anim;
     private bool attacking;
+    private bool eating;
 
     [Header("Movement:")]
     /// <summary> Bestimmt, wie schnell der Char bechleunigen kann </summary>
@@ -25,6 +26,8 @@ public class PlayerScript : CharScript
     [Header("Hands:")]
     public GameObject left_Hand;
     public GameObject right_Hand;
+    public GameObject hitbox;
+    public GameObject interactionSymbol;
 
     /// <summary> Zähler, der bestimmt wie lange der Char noch springen kann </summary>
     private float jumpCounter;
@@ -63,16 +66,41 @@ public class PlayerScript : CharScript
 
 
         PlayerControl();
+
+        if (collectFocus)
+        {
+            interactionSymbol.transform.parent = null;
+            interactionSymbol.transform.localScale = Vector3.one;
+            interactionSymbol.transform.rotation = Quaternion.identity;
+            interactionSymbol.SetActive(true);
+            interactionSymbol.transform.position = (Vector2)(collectFocus.transform.position + 1 * Vector3.up);
+        }
+        else
+        {
+            interactionSymbol.transform.parent = transform;
+            interactionSymbol.SetActive(false);
+        }
     }
 
     public void ActivateControl() { blockControl = false; }
 
     public IEnumerator Eat(int addedHealth)
     {
-        anim.SetTrigger("a_Eat");
+        anim.SetBool("a_eat", true);
         yield return new WaitForSeconds(0.5f);
+        anim.SetBool("a_eat", false);
         lifepoints += addedHealth;
+        if(addedHealth < 0)
+        {
+            StartCoroutine(Camera.main.GetComponent<CameraScript>().Shake());
+            StartCoroutine(gameMenu.HitOverlay());
+        }
+
+        if (lifepoints > 100) lifepoints = 100;
         if (lifepoints <= 0) Play_Death();
+        gameMenu.SetHealth(lifepoints);
+
+        eating = false;
         yield break;
     }
 
@@ -81,11 +109,11 @@ public class PlayerScript : CharScript
     /// </summary>
     private void PlayerControl()
     {
-        anim.SetInteger("dive", (int)Mathf.Sign(rb.velocity.x));
+        anim.SetInteger("dive", (int)Mathf.Sign(transform.localScale.x/*rb.velocity.x*/));
 
 
         //Checke Hechtrolle:
-        if ((Input.GetKey(KeyCode.LeftShift) && !inAir) || blockDive)
+        if ((Input.GetKey(KeyCode.P) && !inAir) || blockDive)
         {
             jumpCounter = 0;
             if (!blockDive)
@@ -140,6 +168,12 @@ public class PlayerScript : CharScript
         }
         if (!Input.GetKey(KeyCode.E)) blockDropCollect = false;
 
+        //Checke, ob waffe gegessen wird:
+        if(Input.GetKey(KeyCode.H) && weapon && !eating)
+        {
+            eating = true;
+            StartCoroutine(weapon.GetComponent<CollBase>().Eat());
+        }
 
         //Fallanimation:
         //anim.SetBool("inAir", inAir);
@@ -158,14 +192,16 @@ public class PlayerScript : CharScript
     {
         //anim.SetInteger("dive", (int)Mathf.Sign(factor));
         anim.SetTrigger("doDive");
-        gameObject.layer = 11;//Objekt
+        hitbox.SetActive(false);
+        gameObject.layer = 9;//GroundOnly
         float t = 0;
-        while(t < 0.25f)
+        while(t < 0.3f)
         {
             t += Time.fixedDeltaTime;
             rb.position += Vector2.right * factor * maxSpeed * 1.5f * Time.fixedDeltaTime;
             yield return new WaitForFixedUpdate();
         }
+        hitbox.SetActive(true);
         gameObject.layer = 8;//Player
         blockDive = false;
         yield break;
@@ -174,7 +210,7 @@ public class PlayerScript : CharScript
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Candy")) return;//Trigger, um Candy zu aktivieren
+        if (!other.CompareTag("Candy") || !other.GetComponent<CharScript>().active) return;//Trigger, um Candy zu aktivieren
         DamageReturn dmgCaused = other.GetComponent<IDamageCausing>().CauseDamage(gameObject);
 
         lifepoints -= dmgCaused.damage;
@@ -193,11 +229,10 @@ public class PlayerScript : CharScript
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (!other.CompareTag("Collectable")) return;
+        if (!(other.CompareTag("Collectable") || other.CompareTag("Finish"))) return;
         
         if (blockDropCollect || collectFocus) return;
-        collectFocus = other.transform.parent.gameObject;
-
+        collectFocus = other.CompareTag("Finish")? other.gameObject : other.transform.parent.gameObject;
         StartCoroutine(Collect(collectFocus));
         return;      
     }
@@ -215,18 +250,17 @@ public class PlayerScript : CharScript
     IEnumerator Collect(GameObject _weapon)
     {
         GameObject currentFocus = collectFocus;
-        while(collectFocus == currentFocus && !Input.GetKey(KeyCode.E))
-        {
-            //hier positionieren
-            yield return new WaitForEndOfFrame();
-        }
+        yield return new WaitWhile(() => collectFocus == currentFocus && !Input.GetKey(KeyCode.E));
+
         if (collectFocus != currentFocus) yield break;
+        if (collectFocus.CompareTag("Finish")) collectFocus.GetComponent<GoalScript>().EndLevel();
+
         yield return new WaitUntil(() => blockDropCollect);//Warte darauf die aktuelle Waffe fallen zu lassen
 
         weapon = _weapon.gameObject;
 
         CollBase coll = weapon.GetComponent<CollBase>();
-        weapon.transform.parent = right_Hand.transform;
+        weapon.transform.parent = coll.weapon.leftHanded? left_Hand.transform : right_Hand.transform;
         weapon.transform.localScale = Vector3.one * coll.display.size_inHand;
         weapon.transform.localPosition = new Vector2(coll.display.handPos_x, coll.display.handPos_y);
         weapon.transform.eulerAngles = Vector3.forward * (right_Hand.transform.eulerAngles.z + Mathf.Sign(transform.localScale.x) * coll.display.handAngle);
@@ -239,9 +273,10 @@ public class PlayerScript : CharScript
         coll.display.anim.SetBool("onGround", false);
         SpriteRenderer sprite = weapon.transform.GetChild(0).GetComponent<SpriteRenderer>();
         sprite.sortingLayerName = "Player";
-        sprite.sortingOrder = 4;
+        sprite.sortingOrder = coll.weapon.leftHanded ? -2 : 4;
 
         coll.Highlight.SetActive(false);
+        coll.Initialize();
         gameMenu.SetNewWeapon(weapon);
         StartCoroutine(gameMenu.ShowWeaponHealth());
 

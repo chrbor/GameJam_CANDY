@@ -23,6 +23,6 @@ public class SpawnScript : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawIcon(transform.position, spawn.GetComponent<SpriteRenderer>().sprite.name, true);
+        Gizmos.DrawIcon(transform.position, spawn.name, true);
     }
 }

@@ -12,13 +12,14 @@ public class Baguette : CollBase
 {
     private bool attacking;
     private bool hitting;
-
+    protected bool attack_Action;
 
     public override void Fire()
     {
         if (attacking) return;
         hitting = false;
         attacking = true;
+        attack_Action = true;
         StartCoroutine(PlayAttack());
     }
 
@@ -26,32 +27,36 @@ public class Baguette : CollBase
     {
         transform.parent = null;
         transform.rotation = Quaternion.identity;
+        manager.player.GetComponent<PlayerScript>().weapon = null;
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        gameObject.layer = 1;//Falle durch alles durch
+
+        StartCoroutine(gameMenu.HideWeaponHealth());
+        StartCoroutine(PlayDestroy());
     }
 
     public override void Drop()
     {
-        transform.parent = null;
-        transform.rotation = Quaternion.identity;
-        transform.localScale = Vector3.one * display.size_onGround;
-        transform.GetChild(1).gameObject.SetActive(true);
-        SpriteRenderer sprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        sprite.sortingLayerName = "Objects";
-        sprite.sortingOrder = 0;
-        manager.player.GetComponent<PlayerScript>().weapon = null;
-        rb.bodyType = RigidbodyType2D.Dynamic;
-        gameObject.layer = 11;//Object
-        coll.radius = 1;
-        coll.enabled = true;
+        base.Drop();
     }
 
-    public override void Eat()
+    protected virtual IEnumerator PlayDestroy()
     {
-        if (item.consumable) StartCoroutine(manager.player.GetComponent<PlayerScript>().Eat((int)(item.healthFactor * weapon.health)));
+        rb.AddForce(new Vector2(manager.player.transform.localScale.x * 100, 300));
+        float rotation = Random.Range(1f, 10f) * Mathf.Sign(Random.Range(-1f, 1f));
+        for (float count = 0; count < 3f; count += Time.deltaTime)
+        {
+            rb.rotation += rotation;
+            yield return new WaitForEndOfFrame();
+        }
+
+        Destroy(gameObject);
+        yield break;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Candy")) return;
+        if (!other.CompareTag("Candy") || !other.GetComponent<CharScript>().active) return;
         if (!hitting)
         {
             hitting = true;
@@ -61,7 +66,7 @@ public class Baguette : CollBase
             else GetDestroyed();
         }
 
-        float x_diff = other.transform.position.x - transform.position.x;
+        float x_diff = other.transform.position.x - manager.player.transform.position.x;
 
         other.GetComponent<Rigidbody2D>().AddForce(RotToVec(90 + (x_diff > 0? -45:45)) * weapon.power);
 
@@ -72,7 +77,6 @@ public class Baguette : CollBase
 
     IEnumerator PlayAttack()
     {
-        Debug.Log("attack");
         GetComponent<Collider2D>().enabled = true;
 
         manager.player.GetComponent<PlayerScript>().anim.SetTrigger(weapon.animTrigger);
@@ -80,6 +84,7 @@ public class Baguette : CollBase
         yield return new WaitForSeconds(0.25f);
         transform.GetChild(2).gameObject.SetActive(false);
 
+        attack_Action = false;
         yield return new WaitForSeconds(weapon.reload);
         GetComponent<Collider2D>().enabled = false;
 

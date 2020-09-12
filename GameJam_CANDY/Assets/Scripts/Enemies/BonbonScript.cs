@@ -4,7 +4,7 @@ using UnityEngine;
 using static GameManager;
 using static AdditionalTools;
 
-public class BonbonScript : CharScript, IDamageCausing
+public class BonbonScript : CharScript, IDamageCausing, ICaddyble
 {
     bool onGround;
     bool jumping;
@@ -23,10 +23,11 @@ public class BonbonScript : CharScript, IDamageCausing
 
     private GameObject face;
 
+    private bool getttingActive;
+
     private void Start()
     {
         inactiveScale = transform.localScale.x;
-        active = true;
 
         face = transform.GetChild(0).gameObject;
     }
@@ -36,7 +37,6 @@ public class BonbonScript : CharScript, IDamageCausing
         if (!run) return;
         
         if (active) JumpToCaddy();
-        else WaitForPlayer();
     }
 
     /// <summary>
@@ -45,6 +45,27 @@ public class BonbonScript : CharScript, IDamageCausing
     private void WaitForPlayer()
     {
         //Do stuff
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (active || !other.CompareTag("Player") || getttingActive) return;
+        getttingActive = true;
+        StartCoroutine(GetActive());
+    }
+
+    IEnumerator GetActive()
+    {
+        yield return new WaitForSeconds(Random.Range(0.2f, 1.5f));
+        GetComponent<Animator>().SetInteger("start", Random.Range(1, 4));
+        face.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        Destroy(GetComponent<Animator>());
+        Destroy(GetComponent<BoxCollider2D>());
+        GetComponent<CircleCollider2D>().enabled = true;
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        active = true;
+        yield break;
     }
 
     /// <summary>
@@ -68,7 +89,6 @@ public class BonbonScript : CharScript, IDamageCausing
         if (jumping) return;
         jumping = true;
         StartCoroutine(Jump(RotToVec(90 + Random.Range(jumpAngle_min, jumpAngle_max) * (diff.x < 0 ? 1 : -1)) * Random.Range(jumpPower_min, jumpPower_max), prepTime));
-
     }
 
 
@@ -81,7 +101,8 @@ public class BonbonScript : CharScript, IDamageCausing
         while(counter < prepTime)
         {
             //Falls Bonbon vom Platz geschubst wird, dann breche Jump ab
-            if (!onGround || !active) { transform.localScale = Vector3.one * activeScale; jumping = false; coll.radius = 0.5f * activeScale; yield break; }
+            if (!active) yield break;
+            if (!onGround) { transform.localScale = Vector3.one * activeScale; jumping = false; coll.radius = 0.5f * activeScale; yield break; }
 
             //Stauche Sprite, um Antizipation aufzubauen:
             percent = 0.5f * counter / prepTime;
@@ -94,6 +115,34 @@ public class BonbonScript : CharScript, IDamageCausing
 
         rb.AddForce(puls);
         jumping = false;
+        yield break;
+    }
+
+    public void FallIntoCaddy(Transform caddy)
+    {
+        active = false;
+        //rb.bodyType = RigidbodyType2D.Kinematic;
+        //rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        Destroy(rb);
+        GetComponent<Collider2D>().enabled = false;
+
+        transform.parent = caddy;
+        StartCoroutine(FallingIntoCaddy());
+    }
+
+    IEnumerator FallingIntoCaddy()
+    {
+        yield return new WaitForEndOfFrame();
+        transform.localPosition = new Vector3(Random.Range(-0.2f, 0.2f), 1.1f);
+        float rotation = Random.Range(-15, 15);
+
+        for (float count = 0; count < 1f; count += Time.fixedDeltaTime)
+        {
+            transform.Rotate(Vector3.forward, rotation);
+            transform.localPosition -= Vector3.up * Time.fixedDeltaTime;
+            transform.localScale -= Vector3.one * Time.fixedDeltaTime * 0.7f;
+            yield return new WaitForFixedUpdate();
+        }
         yield break;
     }
 

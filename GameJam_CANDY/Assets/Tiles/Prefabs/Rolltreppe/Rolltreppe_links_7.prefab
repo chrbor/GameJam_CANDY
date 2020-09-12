@@ -118,10 +118,10 @@ PlatformEffector2D:
   m_RotationalOffset: -45
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
+  m_SurfaceArc: 90
   m_UseSideFriction: 0
   m_UseSideBounce: 0
-  m_SideArc: 1
+  m_SideArc: 30
 --- !u!50 &-1824046777364063367
 Rigidbody2D:
   serializedVersion: 4

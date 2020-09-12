@@ -111,7 +111,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 74499879912983a43850069c704d6c06, type: 2}
-  - {fileID: 2100000, guid: dba65811c1ccbdb4bb279bfc06fa1eee, type: 2}
+  - {fileID: 2100000, guid: 853e2dace04cff1479937d8ee87ca693, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -238,7 +238,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -291,7 +291,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -858,7 +858,7 @@ ParticleSystem:
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
     alignToDirection: 0
-    m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+    m_Texture: {fileID: 2800000, guid: 6f9f5fdaa7009394f88891bcce935fc3, type: 3}
     m_TextureClipChannel: 3
     m_TextureClipThreshold: 0
     m_TextureUVChannel: 0
@@ -988,7 +988,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 20
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4074,8 +4074,8 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    minVertexDistance: 0.2
-    textureMode: 0
+    minVertexDistance: 0
+    textureMode: 1
     ribbonCount: 1
     shadowBias: 0.5
     worldSpace: 0
@@ -4159,7 +4159,7 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
+          value: 0.7857208
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -4167,8 +4167,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.98490566
-          value: 1
+          time: 0.99998134
+          value: 0.19448507
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -5048,7 +5048,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.5
 --- !u!114 &6526582214819939744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5070,16 +5070,17 @@ MonoBehaviour:
     anim: {fileID: 0}
   weapon:
     isProjectile: 0
-    damage: 0
+    damage: 5
     reload: 0.4
-    power: 600
+    power: 500
     recoil: 0
     animTrigger: a_swing
-    maxHealth: 10
+    maxHealth: 15
     health: 0
+    leftHanded: 0
   item:
     consumable: 1
-    healthFactor: 0.25
+    healthFactor: 0.5
   Highlight: {fileID: 6526582213656503922}
 --- !u!1 &9187129396246957837
 GameObject:

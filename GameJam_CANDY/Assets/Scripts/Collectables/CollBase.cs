@@ -1,9 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using static GameManager;
 using UnityEngine;
 
 [System.Serializable]
-public abstract class CollBase : MonoBehaviour
+public abstract class CollBase : MonoBehaviour, ICaddyble
 {
     [SerializeField]
     public Coll_Display display;
@@ -19,7 +19,7 @@ public abstract class CollBase : MonoBehaviour
     /// <summary> Collider, damit das Objekt nicht durch die Welt fällt </summary>
     protected CircleCollider2D coll;
 
-    private void Start()
+    protected void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<CircleCollider2D>();
@@ -42,7 +42,18 @@ public abstract class CollBase : MonoBehaviour
     /// </summary>
     public virtual void Drop()
     {
-        Debug.Log("'Drop()' nicht implementiert");
+        transform.parent = null;
+        transform.rotation = Quaternion.identity;
+        transform.localScale = Vector3.one * display.size_onGround;
+        transform.GetChild(1).gameObject.SetActive(true);
+        SpriteRenderer sprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        sprite.sortingLayerName = "Objects";
+        sprite.sortingOrder = 0;
+        manager.player.GetComponent<PlayerScript>().weapon = null;
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        gameObject.layer = 11;//Object
+        coll.radius = 0.5f;
+        coll.enabled = true;
     }
 
     /// <summary>
@@ -56,9 +67,27 @@ public abstract class CollBase : MonoBehaviour
     /// <summary>
     /// Waffe wird gegessen
     /// </summary>
-    public virtual void Eat()
+    public virtual IEnumerator Eat()
     {
-        Debug.Log("'Eat()' nicht implementiert");
+        if (!item.consumable) yield break;
+        StartCoroutine(manager.player.GetComponent<PlayerScript>().Eat((int)(item.healthFactor * weapon.health)));
+        yield return new WaitForSeconds(0.5f);
+        manager.player.GetComponent<PlayerScript>().weapon = null;
+        Destroy(gameObject);
+        yield break;
+    }
+
+    public virtual void Initialize()
+    {
+        Debug.Log("Initialize() nicht implementiert");
+    }
+
+    public virtual void FallIntoCaddy(Transform caddy)
+    {
+        GameObject obj = Instantiate(manager.caddyContent, caddy);
+        obj.GetComponent<SpriteRenderer>().sprite = transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+        obj.transform.localScale = transform.localScale;
+        Destroy(gameObject);
     }
 }
 
@@ -101,6 +130,8 @@ public class Weapon
     /// <summary> Die Anzahl an getroffenen Schlägen, bis die Waffe auseinanderbricht </summary>
     [HideInInspector]
     public int health;
+    /// <summary> Wenn wahr, dann liegt die Waffe in der linken Hand </summary>
+    public bool leftHanded;
 }
 
 [System.Serializable]

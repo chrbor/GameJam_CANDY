@@ -14,10 +14,10 @@ public class CreditsScript : MonoBehaviour
 
     IEnumerator RollCredits()
     {
-        Vector2 startPos = transform.position;
+        RectTransform rect = GetComponent<RectTransform>();
         yield return new WaitUntil(()=>!Input.anyKey);
 
-        while(transform.position.y < -startPos.y)
+        while(rect.anchoredPosition.y < 0)
         {
             if (Input.GetKey(KeyCode.Escape)) break;
 

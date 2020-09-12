@@ -8,14 +8,19 @@ using UnityEngine.UI;
 public class MenuScript : MonoBehaviour
 {
     private GameObject hitPanel;
+    private GameObject helpPanel;
     private Image image;
     private bool overlaying;
 
-    private void Awake()
+    public void Awake()
     {
-        hitPanel = transform.Find("HitPanel").gameObject;
-        if (!hitPanel) { Debug.Log("Panel not found"); return; }
-        image = hitPanel.GetComponent<Image>();
+        if(transform.Find("Help")) helpPanel = transform.Find("Help").gameObject;
+        if (transform.Find("HitPanel"))
+        {
+            hitPanel = transform.Find("HitPanel").gameObject;
+            image = hitPanel.GetComponent<Image>();
+        }
+        else Debug.Log("Panel not found");
     }
 
     public void QuitGame()
@@ -47,6 +52,27 @@ public class MenuScript : MonoBehaviour
     public void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+    }
+
+    public void ShowHelp()
+    {
+        if(!helpPanel) { Debug.Log("There is no help >:D"); return; }
+        StartCoroutine(ShowingHelp());
+    }
+
+    IEnumerator ShowingHelp()
+    {
+        Image img = helpPanel.GetComponent<Image>();
+        img.color = new Color(1, 1, 1, 0);
+        run = false;
+        helpPanel.SetActive(true);
+        for(float count = 0; count < 1f; count += Time.deltaTime) { img.color += Color.black * Time.deltaTime; yield return new WaitForEndOfFrame(); }
+        yield return new WaitUntil(() => !Input.anyKey);
+        yield return new WaitUntil(() => Input.anyKey);
+        for (float count = 0; count < 1f; count += Time.deltaTime) { img.color += Color.black * Time.deltaTime; yield return new WaitForEndOfFrame(); }
+        helpPanel.SetActive(false);
+        run = true;
+        yield break;
     }
 
     public IEnumerator HitOverlay()

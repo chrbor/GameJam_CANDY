@@ -18,15 +18,26 @@ public class GameManager : MonoBehaviour
     /// <summary> Wenn wahr, dann läuft das Spiel weiter, wenn falsch, dann stoppt das Spiel </summary>
     public static bool run = true;
 
+    //Vorladen der Prefabs:
+    /// <summary> Gameobjekt, das für den Rest des Spiels im Wagen verbleibt </summary>
+    [HideInInspector]
+    public GameObject caddyContent;
+    /// <summary> Gameobjekt, die Eigenschaften einer Aufgabe im HUD anzeigt </summary>
+    [HideInInspector]
+    public GameObject taskField;
+
     void Awake()
     {
         //Erstelle Singleton:
-        if (manager) { manager.caddy = caddy; manager.player = player; Destroy(gameObject); }
+        if (manager) Destroy(gameObject);
         manager = this;
 
         SceneManager.sceneLoaded += OnLevelLoaded;
-
         DontDestroyOnLoad(gameObject);
+
+        //Vorladen:
+        caddyContent = Resources.Load<GameObject>("Prefabs/CaddyContent");
+        taskField = Resources.Load<GameObject>("Prefabs/Task");
     }
 
     public void GameOver()
