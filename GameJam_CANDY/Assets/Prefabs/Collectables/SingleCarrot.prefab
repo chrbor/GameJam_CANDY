@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 300
-  damage: 4
+  damage: 5
 --- !u!60 &1697651788538485014
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -262,9 +262,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.5, y: -0.55}
-      - {x: 0, y: 0.5}
-      - {x: -0.35, y: 0.25}
+    - - {x: 0.39351565, y: -0.6645242}
+      - {x: 0.6058247, y: -0.45187056}
+      - {x: 0.017716885, y: 0.52620953}
+      - {x: -0.38317776, y: 0.1881322}
 --- !u!50 &9046735353657773123
 Rigidbody2D:
   serializedVersion: 4

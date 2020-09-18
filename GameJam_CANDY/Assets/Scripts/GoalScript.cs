@@ -21,9 +21,12 @@ public class GoalScript : MonoBehaviour
 
     public bool EndLevel()
     {
-        bool finished = gameController.CheckIfFinished();
-        if (!finished) return false;
+        if(!caddyIn) { Debug.Log("Can't finish without caddy!"); return false; }
 
+        bool finished = gameController.CheckIfFinished();
+        if (!finished) { Debug.Log("Havn't finished yet"); return false; }
+        Debug.Log("You finished the level!");
+        gameMenu.LevelComplete();
 
         return finished;
     }

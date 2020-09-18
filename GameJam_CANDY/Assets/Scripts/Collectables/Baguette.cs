@@ -81,7 +81,7 @@ public class Baguette : CollBase
 
         manager.player.GetComponent<PlayerScript>().anim.SetTrigger(weapon.animTrigger);
         transform.GetChild(2).gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.15f);
         transform.GetChild(2).gameObject.SetActive(false);
 
         attack_Action = false;

@@ -30,7 +30,7 @@ public class MenuScript : MonoBehaviour
 
     public void Resume()
     {
-        gameObject.SetActive(false);
+        transform.Find("GameMenu").gameObject.SetActive(false);
         run = true;
     }
 
@@ -54,6 +54,11 @@ public class MenuScript : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
 
+    public void LoadCredits()
+    {
+        SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings-1);
+    }
+
     public void ShowHelp()
     {
         if(!helpPanel) { Debug.Log("There is no help >:D"); return; }
@@ -64,14 +69,12 @@ public class MenuScript : MonoBehaviour
     {
         Image img = helpPanel.GetComponent<Image>();
         img.color = new Color(1, 1, 1, 0);
-        run = false;
         helpPanel.SetActive(true);
         for(float count = 0; count < 1f; count += Time.deltaTime) { img.color += Color.black * Time.deltaTime; yield return new WaitForEndOfFrame(); }
         yield return new WaitUntil(() => !Input.anyKey);
         yield return new WaitUntil(() => Input.anyKey);
         for (float count = 0; count < 1f; count += Time.deltaTime) { img.color += Color.black * Time.deltaTime; yield return new WaitForEndOfFrame(); }
         helpPanel.SetActive(false);
-        run = true;
         yield break;
     }
 

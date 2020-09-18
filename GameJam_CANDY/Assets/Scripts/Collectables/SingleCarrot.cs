@@ -4,7 +4,7 @@ using UnityEngine;
 using static GameManager;
 using static AdditionalTools;
 
-public class SingleCarrot : MonoBehaviour, IThrowableScript, ICaddyble
+public class SingleCarrot : MonoBehaviour, IThrowableScript
 {
     public float power;
     public int damage;
@@ -28,7 +28,7 @@ public class SingleCarrot : MonoBehaviour, IThrowableScript, ICaddyble
     {
         if (other.CompareTag("Candy"))
         {
-            if (other.GetComponent<CharScript>().active) return;
+            if (!other.GetComponent<CharScript>().active) return;
             float x_diff = other.transform.position.x - transform.position.x;
 
             other.GetComponent<Rigidbody2D>().AddForce(RotToVec(90 + (rb.velocity.x > 0 ? -45 : 45)) * power);
@@ -37,7 +37,7 @@ public class SingleCarrot : MonoBehaviour, IThrowableScript, ICaddyble
             cScript.lifepoints -= damage;
             if (cScript.lifepoints < 0) cScript.Play_Death();
         }
-        else
+        else if(other.gameObject.layer == 10)//ground
             destroyed = true;
     }
 

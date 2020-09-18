@@ -3,7 +3,7 @@ using static GameManager;
 using UnityEngine;
 
 [System.Serializable]
-public abstract class CollBase : MonoBehaviour, ICaddyble
+public abstract class CollBase : MonoBehaviour
 {
     [SerializeField]
     public Coll_Display display;
@@ -81,14 +81,6 @@ public abstract class CollBase : MonoBehaviour, ICaddyble
     {
         Debug.Log("Initialize() nicht implementiert");
     }
-
-    public virtual void FallIntoCaddy(Transform caddy)
-    {
-        GameObject obj = Instantiate(manager.caddyContent, caddy);
-        obj.GetComponent<SpriteRenderer>().sprite = transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
-        obj.transform.localScale = transform.localScale;
-        Destroy(gameObject);
-    }
 }
 
 [System.Serializable]
@@ -132,6 +124,8 @@ public class Weapon
     public int health;
     /// <summary> Wenn wahr, dann liegt die Waffe in der linken Hand </summary>
     public bool leftHanded;
+    /// <summary> Wenn wahr, dann wird die Aktion ausgeführt ohne auf die animation zu warten </summary>
+    public bool ignoreAnimation;
 }
 
 [System.Serializable]

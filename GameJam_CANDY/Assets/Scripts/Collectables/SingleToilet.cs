@@ -4,7 +4,7 @@ using UnityEngine;
 using static AdditionalTools;
 using static GameManager;
 
-public class SingleToilet : MonoBehaviour, IThrowableScript, ICaddyble
+public class SingleToilet : MonoBehaviour, IThrowableScript
 {
     public float power;
     public int damage;

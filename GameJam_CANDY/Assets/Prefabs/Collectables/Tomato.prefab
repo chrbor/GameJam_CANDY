@@ -266,9 +266,10 @@ MonoBehaviour:
     maxHealth: 5
     health: 0
     leftHanded: 1
+    ignoreAnimation: 0
   item:
     consumable: 1
-    healthFactor: 5
+    healthFactor: 10
   Highlight: {fileID: 6261984419189374702}
   singleCarrot: {fileID: 7035219962717372141, guid: e557a8ef9b8c1794ebe28c828221c96a,
     type: 3}
@@ -432,7 +433,7 @@ MonoBehaviour:
   m_Color: {r: 0.9529412, g: 0.39023075, b: 0.3176471, a: 1}
   m_Intensity: 0.2
   m_LightVolumeOpacity: 0.77
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 00000000b94e7b47597e6ab079ddf7435ffbe9db6146be868b7b0f09596c5a20dd1c32ec
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -508,9 +509,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -605422753
+  m_SortingLayer: 4
+  m_SortingOrder: -1
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0

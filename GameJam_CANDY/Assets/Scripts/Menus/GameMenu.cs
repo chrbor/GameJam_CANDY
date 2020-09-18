@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static GameController;
+using static GameManager;
 
 public class GameMenu : MenuScript
 {
@@ -121,5 +122,38 @@ public class GameMenu : MenuScript
         _weaponHealth.alpha = 1;
         for (float count = 0; count < 1 || stopRoutine; count += Time.fixedDeltaTime) { _weaponHealth.alpha -= Time.fixedDeltaTime; yield return new WaitForFixedUpdate(); }
         yield break;
+    }
+
+
+    public void GameOver()
+    {
+        run = false;
+        Transform menu = transform.GetChild(3);
+        menu.Find("GameOver").gameObject.SetActive(true);
+        menu.Find("LevelComplete").gameObject.SetActive(false);
+        Transform buttons = menu.GetChild(0);
+        buttons.Find("NextButton").gameObject.SetActive(false);
+
+        Canvas.ForceUpdateCanvases();
+        buttons.GetComponent<HorizontalLayoutGroup>().enabled = false;
+        buttons.GetComponent<HorizontalLayoutGroup>().enabled = true;
+
+        menu.gameObject.SetActive(true);
+    }
+
+    public void LevelComplete()
+    {
+        run = false;
+        Transform menu = transform.GetChild(3);
+        menu.Find("GameOver").gameObject.SetActive(false);
+        menu.Find("LevelComplete").gameObject.SetActive(true);
+        Transform buttons = menu.GetChild(0);
+        buttons.Find("NextButton").gameObject.SetActive(true);
+
+        Canvas.ForceUpdateCanvases();
+        buttons.GetComponent<HorizontalLayoutGroup>().enabled = false;
+        buttons.GetComponent<HorizontalLayoutGroup>().enabled = true;
+
+        menu.gameObject.SetActive(true);
     }
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5496751211399443820}
   - component: {fileID: 3015006606186276649}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Sign0 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7703609755655454857}
   - component: {fileID: 2564626180293470487}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Sign0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 7110912737777771317}
   - component: {fileID: 7110912737777771316}
   - component: {fileID: 7110912737777771315}
-  m_Layer: 10
+  m_Layer: 21
   m_Name: Kasten1 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ PlatformEffector2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7110912737777771314}
   m_Enabled: 1
-  m_UseColliderMask: 1
+  m_UseColliderMask: 0
   m_ColliderMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -286,4 +286,4 @@ PlatformEffector2D:
   m_SurfaceArc: 45
   m_UseSideFriction: 0
   m_UseSideBounce: 0
-  m_SideArc: 30
+  m_SideArc: 1

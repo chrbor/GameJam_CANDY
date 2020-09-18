@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static GameMenu;
 using static GameManager;
+using static WayPoint;
 
 public class GameController : MonoBehaviour
 {
@@ -83,6 +84,12 @@ public class GameController : MonoBehaviour
         gameMenu.SetNewCaddy();
     }
 
+    private void Start()
+    {
+        Waypoints = new List<Vector2>();
+        Waypoints.Add(transform.position);
+    }
+
     public int AddToCaddy(string spriteName, int number)
     {
         int taskNumber = CheckIfNeeded(spriteName);
@@ -110,7 +117,8 @@ public class GameController : MonoBehaviour
         //if (type == Task.collectType.none) return -1;
         foreach (Task task in tasks) {task_needed++; if (task.type == type) break; }
 
-        return tasks[task_needed].type == type? task_needed : -1;
+        if (tasks[task_needed].type == type) { return tasks[task_needed].collectCount == tasks[task_needed].collectNumber ? -1 : task_needed; }
+        else return -1;
     }
 
     public bool CheckIfFinished()
@@ -118,6 +126,11 @@ public class GameController : MonoBehaviour
         bool complete = true;
         foreach (Task task in tasks) complete &= task.taskComplete;
         return complete;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawIcon(transform.position, "Center", false);
     }
 }
 

@@ -34,8 +34,8 @@ TagManager:
   - Weapon
   - PlayerHitboxOnly
   - Slant
-  - 
-  - 
+  - PlayerDown
+  - EnemyDown
   - 
   - 
   - 

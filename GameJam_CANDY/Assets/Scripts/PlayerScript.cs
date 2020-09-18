@@ -133,7 +133,9 @@ public class PlayerScript : CharScript
             rb.velocity = jumpCounter == jumpPower ? new Vector2(rb.velocity.x, jumpCounter) : rb.velocity + Vector2.up * jumpCounter;
             jumpCounter--;
         }
-        
+
+        //Checke Fall:
+        gameObject.layer = Input.GetKey(KeyCode.S) && !blockDive ? 22 : 8;
 
         //Checke Bewegung:
         if(Input.GetKey(KeyCode.D) == Input.GetKey(KeyCode.A))
@@ -210,6 +212,7 @@ public class PlayerScript : CharScript
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log(other.name + ": " + other.tag);
         if (!other.CompareTag("Candy") || !other.GetComponent<CharScript>().active) return;//Trigger, um Candy zu aktivieren
         DamageReturn dmgCaused = other.GetComponent<IDamageCausing>().CauseDamage(gameObject);
 
@@ -239,7 +242,9 @@ public class PlayerScript : CharScript
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.transform.parent && other.transform.parent.gameObject == collectFocus) collectFocus = null;
+        if ((other.transform.parent && other.transform.parent.gameObject == collectFocus)
+        || (other.CompareTag("Finish") && other.gameObject == collectFocus))
+            collectFocus = null;
     }
 
     /// <summary>
@@ -253,7 +258,7 @@ public class PlayerScript : CharScript
         yield return new WaitWhile(() => collectFocus == currentFocus && !Input.GetKey(KeyCode.E));
 
         if (collectFocus != currentFocus) yield break;
-        if (collectFocus.CompareTag("Finish")) collectFocus.GetComponent<GoalScript>().EndLevel();
+        if (collectFocus.CompareTag("Finish")) { collectFocus.GetComponent<GoalScript>().EndLevel(); collectFocus = null; yield break; }
 
         yield return new WaitUntil(() => blockDropCollect);//Warte darauf die aktuelle Waffe fallen zu lassen
 
@@ -301,7 +306,8 @@ public class PlayerScript : CharScript
     public override void Play_Death()
     {
         Debug.Log("Player died and now needs a diet ;D");
-
+        run = false;
+        gameMenu.GameOver();
     }
 }
     

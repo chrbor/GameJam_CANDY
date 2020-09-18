@@ -32,41 +32,45 @@ public class CaddyScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //Candy-> Damage, Collectable-> liegende Sachen, Hitbox-> Wurfgeschosse
-        //if (!(other.CompareTag("Candy") || other.CompareTag("Collectable") || other.CompareTag("Hitbox"))) return;
-
+        Sprite sprite = null;
         if (other.CompareTag("Candy"))
         {
-            if (!other.GetComponent<CharScript>().active) return;
-            other.GetComponent<ICaddyble>().FallIntoCaddy(transform);
+            CharScript cScript = other.GetComponent<CharScript>();
+            if (!cScript.active) return;
+
+            sprite = cScript.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
             gameMenu.SetCaddyHealth(--gameController.candyCount);
-            return;
+            Destroy(other.gameObject);
+            if (gameController.candyCount <= 0) { Debug.Log("Zu viele Süßwaren im Einkaufswagen!"); gameMenu.GameOver(); }
         }
 
-        if (other.CompareTag("Collectable"))
+        else if (other.CompareTag("Collectable"))
         {
-            if (other.transform.parent == manager.player.GetComponent<PlayerScript>().right_Hand) return;
-            CollBase coll = other.transform.parent? other.transform.parent.GetComponent<CollBase>() : other.GetComponent<CollBase>();
-            Sprite sprite = coll.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+            if (other.transform.parent == manager.player.GetComponent<PlayerScript>().right_Hand.transform && other.gameObject.layer == 19) { Debug.Log("return"); return; }
+            CollBase coll = other.transform.childCount > 0 ? other.GetComponent<CollBase>() : other.transform.parent.GetComponent<CollBase>();
+            sprite = coll.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
             int remainer = gameController.AddToCaddy(sprite.name, coll.weapon.leftHanded ? coll.weapon.health : 1);
             if (remainer == -1) return;
 
-            if(remainer > 0) coll.weapon.health = remainer; 
-            FallIntoCaddy(sprite);
-
-            return;
+            if (remainer > 0) coll.weapon.health = remainer;
+            else
+            {
+                if (coll.weapon.leftHanded) Destroy(manager.player.GetComponent<PlayerScript>().left_Hand.transform.GetChild(0).gameObject);
+                Destroy(coll.gameObject);
+            }
         }
 
-        if (other.CompareTag("Hitbox"))
+        else if (other.CompareTag("Hitbox"))
         {
-            Sprite sprite = other.GetComponent<SpriteRenderer>().sprite;
+            sprite = other.GetComponent<SpriteRenderer>().sprite;
             int remainer = gameController.AddToCaddy(sprite.name, 1);
             if (remainer != 0) return;
 
-            FallIntoCaddy(sprite);
-
-            return;
+            Destroy(other.gameObject);
         }
+        else return;
+
+        FallIntoCaddy(sprite);
     }
 
     private void FallIntoCaddy(Sprite sprite)
@@ -74,6 +78,5 @@ public class CaddyScript : MonoBehaviour
         GameObject obj = Instantiate(manager.caddyContent, transform);
         obj.GetComponent<SpriteRenderer>().sprite = sprite;
         obj.transform.localScale = transform.localScale;
-        Destroy(gameObject);
     }
 }

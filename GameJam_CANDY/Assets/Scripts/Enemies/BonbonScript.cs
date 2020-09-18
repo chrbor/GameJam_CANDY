@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using static GameManager;
 using static AdditionalTools;
+using static WayPoint;
 
-public class BonbonScript : CharScript, IDamageCausing, ICaddyble
+public class BonbonScript : CharScript, IDamageCausing
 {
     bool onGround;
     bool jumping;
@@ -21,15 +22,17 @@ public class BonbonScript : CharScript, IDamageCausing, ICaddyble
     /// <summary> Größe des Bonbons, wenn inaktiv </summary>
     private float inactiveScale;
 
+    private Animator anim;
     private GameObject face;
-
-    private bool getttingActive;
+    private GameObject body;
+    private bool gettingActive;
 
     private void Start()
     {
         inactiveScale = transform.localScale.x;
-
-        face = transform.GetChild(0).gameObject;
+        anim = transform.GetChild(0).GetComponent<Animator>();
+        body = transform.GetChild(0).gameObject;
+        face = body.transform.GetChild(0).gameObject;
     }
 
     void Update()
@@ -42,29 +45,26 @@ public class BonbonScript : CharScript, IDamageCausing, ICaddyble
     /// <summary>
     /// Warte darauf, dass der Spieler in die Nähe kommt
     /// </summary>
-    private void WaitForPlayer()
-    {
-        //Do stuff
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (active || !other.CompareTag("Player") || getttingActive) return;
-        getttingActive = true;
+        if (active || !other.CompareTag("Player") || gettingActive) return;
+        gettingActive = true;
         StartCoroutine(GetActive());
     }
 
     IEnumerator GetActive()
     {
         yield return new WaitForSeconds(Random.Range(0.2f, 1.5f));
-        GetComponent<Animator>().SetInteger("start", Random.Range(1, 4));
+        anim.SetInteger("start", Random.Range(1, 4));
         face.SetActive(true);
         yield return new WaitForSeconds(1f);
-        Destroy(GetComponent<Animator>());
+
         Destroy(GetComponent<BoxCollider2D>());
         GetComponent<CircleCollider2D>().enabled = true;
         rb.bodyType = RigidbodyType2D.Dynamic;
         active = true;
+
+        transform.localScale = Vector3.one * activeScale;
         yield break;
     }
 
@@ -78,10 +78,17 @@ public class BonbonScript : CharScript, IDamageCausing, ICaddyble
         onGround = hit.collider;
         if (!onGround) return;
 
-        if(Mathf.Abs(diff.y) > 10f)
+        if(Mathf.Abs(diff.y) > 6)
         {
             //Bewege dich zu einer Rampe, um in die entsprechende Ebene zu gelangen:
-            return;
+            Vector2 waypoint = new Vector2();
+            for(int i = 0; i < Waypoints.Count ; i++)
+            {
+                waypoint = Waypoints[i];
+                if (Mathf.Abs(waypoint.y - manager.caddy.transform.position.y) < 6) break;
+            }
+            Debug.Log(waypoint);
+            diff = waypoint - (Vector2)transform.position;
         }
 
 
@@ -118,34 +125,6 @@ public class BonbonScript : CharScript, IDamageCausing, ICaddyble
         yield break;
     }
 
-    public void FallIntoCaddy(Transform caddy)
-    {
-        active = false;
-        //rb.bodyType = RigidbodyType2D.Kinematic;
-        //rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        Destroy(rb);
-        GetComponent<Collider2D>().enabled = false;
-
-        transform.parent = caddy;
-        StartCoroutine(FallingIntoCaddy());
-    }
-
-    IEnumerator FallingIntoCaddy()
-    {
-        yield return new WaitForEndOfFrame();
-        transform.localPosition = new Vector3(Random.Range(-0.2f, 0.2f), 1.1f);
-        float rotation = Random.Range(-15, 15);
-
-        for (float count = 0; count < 1f; count += Time.fixedDeltaTime)
-        {
-            transform.Rotate(Vector3.forward, rotation);
-            transform.localPosition -= Vector3.up * Time.fixedDeltaTime;
-            transform.localScale -= Vector3.one * Time.fixedDeltaTime * 0.7f;
-            yield return new WaitForFixedUpdate();
-        }
-        yield break;
-    }
-
     public DamageReturn CauseDamage(GameObject enemy)
     {
         Vector2 diff = enemy.transform.position - transform.position;
@@ -165,6 +144,7 @@ public class BonbonScript : CharScript, IDamageCausing, ICaddyble
     IEnumerator Playing_Death()
     {
         float rotation = Random.Range(1f, 10f) * Mathf.Sign(Random.Range(-1f, 1f));
+        transform.localScale = Vector3.one * activeScale;
         transform.GetChild(2).gameObject.SetActive(true);
 
         for(float count = 0; count < 0.5f; count += Time.deltaTime)
@@ -173,9 +153,9 @@ public class BonbonScript : CharScript, IDamageCausing, ICaddyble
             yield return new WaitForEndOfFrame();
         }
 
-        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+        SpriteRenderer sprite = anim.GetComponent<SpriteRenderer>();
         sprite.sprite = Resources.Load<Sprite>("Wolke" + Random.Range(1, 5));
-        Destroy(transform.GetChild(0).gameObject);
+        Destroy(face);
         GetComponent<CircleCollider2D>().enabled = false;
         rb.bodyType = RigidbodyType2D.Static;
         //yield return new WaitForSeconds(3);

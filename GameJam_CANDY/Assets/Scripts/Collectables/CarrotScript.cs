@@ -49,13 +49,6 @@ public class CarrotScript : CollBase
         base.Drop();
     }
 
-    public override void FallIntoCaddy(Transform caddy)
-    {
-        if (currentCarrot)
-            Destroy(currentCarrot);
-        base.FallIntoCaddy(caddy);
-    }
-
     public override IEnumerator Eat()
     {
         if (!item.consumable) yield break;
@@ -79,8 +72,9 @@ public class CarrotScript : CollBase
     IEnumerator PlayAttack()
     {
         manager.player.GetComponent<PlayerScript>().anim.SetTrigger(weapon.animTrigger);
-
-        yield return new WaitForSeconds(0.3f);
+        
+        if(!weapon.ignoreAnimation) yield return new WaitForSeconds(0.1f);
+        if (manager.player.GetComponent<PlayerScript>().weapon != gameObject) yield break;
         currentCarrot.transform.GetChild(0).gameObject.SetActive(true);
         currentCarrot.transform.parent = null;
         currentCarrot.transform.localScale = Vector3.one * single_GoundScale;

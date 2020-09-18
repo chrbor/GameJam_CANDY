@@ -26,8 +26,6 @@ public class MelonScript : CollBase
     {
         if (!other.CompareTag("Candy") || !other.GetComponent<CharScript>().active) return;
 
-        Debug.Log("Hit");
-
         float x_diff = other.transform.position.x - transform.position.x;
 
         other.GetComponent<Rigidbody2D>().AddForce(RotToVec(90 + (x_diff > 0 ? -45 : 45)) * weapon.power);
@@ -37,24 +35,8 @@ public class MelonScript : CollBase
         if (cScript.lifepoints < 0) cScript.Play_Death();
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (gameObject.layer != 19 || !other.gameObject.CompareTag("Candy")) return;//nicht weapon
-
-        float x_diff = other.transform.position.x - transform.position.x;
-
-        other.gameObject.GetComponent<Rigidbody2D>().AddForce(RotToVec(90 + (x_diff > 0 ? -45 : 45)) * weapon.power);
-
-        CharScript cScript = other.gameObject.GetComponent<CharScript>();
-        cScript.lifepoints -= weapon.damage;
-        if (cScript.lifepoints < 0) cScript.Play_Death();
-    }
-
-
     IEnumerator PlayAttack()
     {
-        Debug.Log("attack");
-
         manager.player.GetComponent<PlayerScript>().anim.SetTrigger(weapon.animTrigger);
 
         yield return new WaitForSeconds(0.3f);
@@ -62,7 +44,13 @@ public class MelonScript : CollBase
         transform.parent = null;
         StartCoroutine(gameMenu.HideWeaponHealth());
         transform.localScale = Vector3.one * display.size_inHand * 2;
+
         CircleCollider2D coll = GetComponent<CircleCollider2D>();
+        coll.radius = display.size_inHand / 2;
+        coll.isTrigger = true;
+        coll.enabled = true;
+
+        coll = transform.GetChild(3).GetComponent<CircleCollider2D>();
         coll.radius = display.size_inHand/2;
 
         gameObject.layer = 19;//weapon
@@ -72,8 +60,7 @@ public class MelonScript : CollBase
         yield return new WaitForSeconds(0.1f);
         coll.enabled = true;
 
-
-        for(float count = 0; count < weapon.reload; count += Time.fixedDeltaTime)
+        for (float count = 0; count < weapon.reload; count += Time.fixedDeltaTime)
         {
             transform.Rotate(Vector3.forward, -rb.velocity.x);
             yield return new WaitForFixedUpdate();
@@ -107,6 +94,8 @@ public class MelonScript : CollBase
             yield return new WaitForEndOfFrame();
         }
         Destroy(transform.GetChild(0).gameObject);
+        GetComponent<Collider2D>().enabled = false;
+
         yield return new WaitForSeconds(6);
         foreach (var part in activeParts) Destroy(part);
         Destroy(gameObject);

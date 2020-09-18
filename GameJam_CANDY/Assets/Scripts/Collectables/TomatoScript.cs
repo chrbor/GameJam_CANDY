@@ -8,7 +8,7 @@ using static AdditionalTools;
 /// <summary>
 /// Tomaten werden geworfen und explodieren, wenn sie aufschlagen
 /// </summary>
-public class TomatoScript : MonoBehaviour, IThrowableScript, ICaddyble
+public class TomatoScript : MonoBehaviour, IThrowableScript
 {
     public float power;
     public int damage;
@@ -48,7 +48,7 @@ public class TomatoScript : MonoBehaviour, IThrowableScript, ICaddyble
 
     IEnumerator PlayExplosion(SpriteRenderer sprite)
     {
-        transform.localScale = Vector3.one * 2.5f;
+        transform.localScale = Vector3.one * 2f;
         sprite.sprite = Resources.LoadAll<Sprite>("Tomate")[1];
         GetComponent<Collider2D>().enabled = true;
 
